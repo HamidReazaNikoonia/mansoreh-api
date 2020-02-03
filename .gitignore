@@ -4,6 +4,11 @@ package-lock.json
 # Environment variables
 .env
 
+.DS_Store
+/*/.DS_Store
+/public/*/.DS_Store
+/public/*/*/.DS_Store
+
 # Logs
 logs
 *.log

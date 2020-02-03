@@ -18,6 +18,9 @@ const error = require('../api/middlewares/error');
 */
 const app = express();
 
+const SERVER_ADD = 'http://localhost:3000';
+app.locals.server = SERVER_ADD;
+
 // request logging. dev: console | production: file
 app.use(morgan(logs));
 
@@ -38,8 +41,8 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
- app.set('views', './src/views');
- app.set('view engine', 'ejs')
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
 
 // enable authentication
 app.use(passport.initialize());
