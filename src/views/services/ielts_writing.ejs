@@ -224,7 +224,7 @@ header .content h3 {
                 <div  class=" w-75 trigger_handler" id="upload_1"> Upload File </div>
                 <input id="sub_upload" data-wow-delay="1s" class="upload_2 w-75 " type="submit" name="">
             
-                <input  class="input_file" type="file" name="file">
+                <input  class="input_file" type="file" name="singleFile">
                 
               </div>
                 
@@ -704,7 +704,7 @@ header .content h3 {
           
           console.log(formData);
     $.ajax({
-        url: '{{ route("upload") }}',
+        url: '<%=server%>/upload',
         type: 'POST',              
         data: formData,
       processData: false,

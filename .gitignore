@@ -9,6 +9,8 @@ package-lock.json
 /public/*/.DS_Store
 /public/*/*/.DS_Store
 
+storage/*
+
 # Logs
 logs
 *.log
