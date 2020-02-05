@@ -29,6 +29,7 @@ const serviceSchema = new mongoose.Schema({
     maxlength: 128,
     trim: true,
   },
+  details: String,
   mobile: {
     type: String,
     required: true,
@@ -36,7 +37,7 @@ const serviceSchema = new mongoose.Schema({
   telegram: String,
   send_via: {
     type: String,
-    enum: ['telegram', 'email'],
+    enum: ['telegram', 'email', 'both'],
     visited: {
       type: Boolean,
       default: false,

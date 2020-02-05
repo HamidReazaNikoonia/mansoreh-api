@@ -546,6 +546,8 @@ header .content h3 {
     <script src="<%=server%>/static/js/selectFx.js"></script>
     <script src="<%=server%>/static/js/fullscreenForm.js"></script>
     <script>
+
+    var SERVER_ADDRESS = "<%=server%>";
       (function() {
         var formWrap = document.getElementById('fs-form-wrap');
 
@@ -567,10 +569,6 @@ header .content h3 {
     </script>
 
 <script src="<%=server%>/static/js/wow.js"></script>
-<script type="text/javascript">
-    new WOW().init();
-</script>
-
 
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -579,174 +577,6 @@ header .content h3 {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
-
-    <script>
-      $(document).ready(function() {
-
-
-
-        $('.trigger_handler').click(function() {
-          var but = $('.input_file');
-          but.click();
-        });
-
-        window.uploaded_file = '';
-
-
-        function removeUploadLayout() {
-          $('body').removeClass('bg-white');
-          $('.container-fluid').css('display','none');
-          $('.container_').css('display', 'block');
-          $('.container_').css('visibility', 'visible');
-
-        }
-        
-
-        //PARALLAX
-        //
-        
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        }); 
-
-
-        $('#myform').submit(function(e) {
-          e.preventDefault();
-          loading_(true);
-          var user_name ,
-          user_family ,
-          email,
-          mobile,
-          telegram,
-          send_via,
-          details,
-          input;
-
-          user_name = $("input[name=user_name]").val();
-          user_family = $("input[name=user_family]").val();
-          email= $("input[name=email]").val();
-          mobile = $("input[name=mobile]").val();
-          // telegram = $("input[name=telegram]").val();
-          telegram = null;
-          send_via = $("input[name=send_via]:checked").val();
-          details = $("textarea[name=details]").val();
-          input = window.uploaded_file;
-
-
-
-
-          console.log(input);
-
-          function loading_(state) {
-            if(state) {
-              $('.fs-submit').text(" Loading ");
-              return false;
-            }
-
-            $('.fs-submit').text("Send");
-            return false;
-          }
-
-           $.ajax({
-                 url: '{{ url("service/i/writing") }}',
-                  type: 'POST',
-        
-                   
-                data: {
-                  user_name : user_name,
-                  user_family : user_family,
-                  email  : email,
-                  mobile : mobile,
-                  telegram : telegram,
-                  send_via: send_via,
-                  details: details,
-                  input : input
-                },
-                success: function(result)
-                {
-                    console.log('success');
-                     alert('done ');
-                     loading_(false);
-                     window.uploaded_file = '';
-                     console.log(result);
-                },
-                error: function(data)
-                {
-                    console.log(data);
-                    loading_(false);
-                    alert('Try Again');
-                }
-            });
-
-
-        });
-
-        function loading(state) {
-          
-          var ele = $('#sub_upload');
-
-          if(state) {
-            ele.prop("value","Loading ...");
-            return false;
-          }
-
-          ele.prop("value","Submit");
-
-        }
-        
-
-        $('#upload_').submit(function(event) {
-          event.preventDefault();
-          loading(true);
-          var formData = new FormData($("#upload_")[0]);
-          
-          console.log(formData);
-    $.ajax({
-        url: '<%=server%>/upload',
-        type: 'POST',              
-        data: formData,
-      processData: false,
-      contentType: false,
-        success: function(result)
-        {
-            console.log('success');
-             window.uploaded_file = result;
-             loading(false);
-             removeUploadLayout();
-        },
-        error: function(data)
-        {
-            console.log(data);
-        }
-    });
-
-});
-        
-      
-
-$(window).scroll(function(){
-  parallax();
-});
-
-function parallax(){
-  var scrolled = $(window).scrollTop();
-  $('.bg').css('top',-(scrolled*0.1)+'px');
-  $('header .content').css('top',50+(scrolled*0.1)+'%');
-  $('header .content').css('opacity',1-(scrolled*0.01)/10);
-  $('header .content').css('opacity',1-(scrolled*0.01)/10);
-};
-
-
-
-
-
-
-
-
-      });
-    </script>
 
     <script src="<%=server%>/static/js/dropzone.js"></script>
     <script src="<%=server%>/static/js/service.js"></script>
