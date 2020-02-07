@@ -147,7 +147,7 @@ $('#myform').submit((e) => {
   telegram = null;
   send_via = $('input[name=send_via]:checked').val();
   details = $('textarea[name=details]').val();
-  input = window.uploaded_file;
+  input = window.uploaded_file.id;
 
 
   console.log(input);
@@ -176,6 +176,9 @@ $('#myform').submit((e) => {
       telegram,
       send_via,
       details,
+      service_file: window.uploaded_file.uploadedFile._id,
+      service_type: serviceType,
+      service_kind: serviceKind,
     },
     success(result) {
       console.log('success');

@@ -1,5 +1,6 @@
 const express = require('express');
 const uploder = require('../../services/upload');
+const Upload = require('../../domain/upload/upload.model');
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.get('/service/i/w', (req, res, next) => {
 });
 
 
-router.post('/upload', uploder.single('singleFile'), (req, res, next) => {
+router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
   try {
     const { file } = req;
     if (!file) {
@@ -24,10 +25,15 @@ router.post('/upload', uploder.single('singleFile'), (req, res, next) => {
       });
     }
 
+    const fileUploded = {
+      file_name: file.filename,
+      field_name: file.fieldname,
+    };
+    const newUpload = new Upload(fileUploded);
+    const uploadedFile = await newUpload.save();
+
     res.status(200).json({
-      status: 'success',
-      code: '200',
-      message: 'file uploaded successfully',
+      uploadedFile,
     });
   } catch (error) {
     console.log(error.message);

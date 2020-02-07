@@ -10,6 +10,7 @@ const APIError = require('../../utils/APIError');
 const serviceSchema = new mongoose.Schema({
   _user_id: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
   },
   email: {
     type: String,
@@ -38,38 +39,38 @@ const serviceSchema = new mongoose.Schema({
   send_via: {
     type: String,
     enum: ['telegram', 'email', 'both'],
-    visited: {
-      type: Boolean,
-      default: false,
-    },
-    payment_status: {
-      type: Boolean,
-      default: false,
-    },
-    call_to_user: {
-      type: Boolean,
-      default: false,
-    },
-    serviceType: {
-      type: String,
-      enum: ['ielts', 'tofel'],
-      required: true,
-    },
-    serviceKind: {
-      type: String,
-      enum: ['speaking', 'writing'],
-      required: true,
-    },
-    service_file: {
-      type: String,
-    },
-    service_result: {
-      type: String,
-    },
-    invoice_id: String,
-
-
   },
+  visited: {
+    type: Boolean,
+    default: false,
+  },
+  payment_status: {
+    type: Boolean,
+    default: false,
+  },
+  call_to_user: {
+    type: Boolean,
+    default: false,
+  },
+  service_type: {
+    type: String,
+    enum: ['ielts', 'tofel'],
+    required: true,
+  },
+  service_kind: {
+    type: String,
+    enum: ['speaking', 'writing'],
+    required: true,
+  },
+  service_file: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Upload',
+  },
+  service_result: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Upload',
+  },
+  invoice_id: String,
 }, {
   timestamps: true,
 });
