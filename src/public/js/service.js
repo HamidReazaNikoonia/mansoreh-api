@@ -128,6 +128,10 @@ function removeUploadLayout() {
 
 
 $('#myform').submit((e) => {
+  if (window.uploaded_file == '' || !window.uploaded_file.uploadedFile) {
+    alert('please insert file first !');
+    return false;
+  }
   e.preventDefault();
   loading_(true);
   let user_name;
@@ -143,11 +147,10 @@ $('#myform').submit((e) => {
   user_family = $('input[name=user_family]').val();
   email = $('input[name=email]').val();
   mobile = $('input[name=mobile]').val();
-  // telegram = $("input[name=telegram]").val();
-  telegram = null;
+  telegram = $('input[name=telegram]').val();
   send_via = $('input[name=send_via]:checked').val();
   details = $('textarea[name=details]').val();
-  input = window.uploaded_file.id;
+  input = window.uploaded_file.uploadedFile._id;
 
 
   console.log(input);
@@ -209,6 +212,10 @@ function loading(state) {
 
 
 $('#upload_').submit((event) => {
+  if ($('.input_file')[0].files.length == 0) {
+	  alert('please insert file first !');
+	  return false;
+  }
   event.preventDefault();
   loading(true);
   const formData = new FormData($('#upload_')[0]);
@@ -221,6 +228,12 @@ $('#upload_').submit((event) => {
     processData: false,
     contentType: false,
     success(result) {
+      console.log(result.statusText);
+      if (result.statusText == 'error') {
+        alert('server error, please check your connections');
+        loading(false);
+        return false;
+      }
       console.log('success');
       console.log('result of server ');
       console.log(result);
@@ -230,6 +243,11 @@ $('#upload_').submit((event) => {
     },
     error(data) {
       console.log(data);
+      if (data.statusText == 'error') {
+			  alert('server error, please check your connections');
+			  loading(false);
+			  return false;
+      }
     },
   });
 });

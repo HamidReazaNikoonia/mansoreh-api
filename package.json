@@ -38,6 +38,9 @@
     "type": "git",
     "url": "git@github.com:danielfsousa/express-rest-es2017-boilerplate.git"
   },
+  "nodemonConfig": {
+    "ignore": ["storage", "docs/*", "src/public/*"]
+  },
   "keywords": [
     "express",
     "node",
