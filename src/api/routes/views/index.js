@@ -17,6 +17,14 @@ router.get('/service/i/s', (req, res, next) => {
   res.render('services/ielts_speaking');
 });
 
+router.get('/service/t/s', (req, res, next) => {
+  res.render('services/tofel_speaking');
+});
+
+router.get('/service/t/w', (req, res, next) => {
+  res.render('services/tofel_writing');
+});
+
 
 router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
   try {
