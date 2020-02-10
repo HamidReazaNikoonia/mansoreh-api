@@ -13,6 +13,10 @@ router.get('/service/i/w', (req, res, next) => {
   res.render('services/ielts_writing');
 });
 
+router.get('/service/i/s', (req, res, next) => {
+  res.render('services/ielts_speaking');
+});
+
 
 router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
   try {
