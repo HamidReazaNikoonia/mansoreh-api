@@ -61,6 +61,7 @@ app.use('/', viewsRoutes);
 
 // enable static rendering
 app.use('/static', express.static('./src/public'));
+app.use('/file', express.static('./storage'));
 
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);

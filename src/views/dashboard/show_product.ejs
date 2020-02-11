@@ -221,104 +221,13 @@ tbody tr td  {
 
   <body id="page-top">
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+     <%- include('layout/header')  %>
 
-      <a class="navbar-brand mr-1" href="index.html">Mansoreh</a>
-
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <!-- Navbar Search -->
-      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-
-      <!-- Navbar -->
-      <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">9+</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user-circle fa-fw"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Activity Log</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-          </div>
-        </li>
-      </ul>
-
-    </nav>
 
     <div id="wrapper">
 
       <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="index.html">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Login Screens:</h6>
-            <a class="dropdown-item" href="login.html">Login</a>
-            <a class="dropdown-item" href="register.html">Register</a>
-            <a class="dropdown-item" href="forgot-password.html">Forgot Password</a>
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Other Pages:</h6>
-            <a class="dropdown-item" href="404.html">404 Page</a>
-            <a class="dropdown-item active" href="blank.html">Blank Page</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
-        </li>
-      </ul>
+      <%-   include('layout/side_bar')  %>
 
       <div id="content-wrapper">
 
@@ -329,11 +238,11 @@ tbody tr td  {
             <li class="breadcrumb-item">
               <a href="{{ url('/admin') }}">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">details</li>
+            <li class="breadcrumb-item active">Service Details</li>
           </ol>
 
           <!-- Page Content -->
-          <h1>User Information</h1>
+          <h1>Service Information</h1>
           <hr>
           <!--<p></p> -->
 
@@ -353,17 +262,10 @@ tbody tr td  {
             <header>
                 <div class="row">
                     <div class="col">
-                            <h1 style="padding-top:20px">MANSOREH LOGO</h1>
+                            <h1 style="padding-top:20px"><%= appName  %></h1>
                     </div>
-                    <div class="col company-details">
-                        <h2 class="name">
-                            <a target="_blank" href="https://lobianijs.com">
-                            ------------
-                            </a>
-                        </h2>
-                        <div>--------</div>
-                        <div>---------</div>
-                        <div>--------</div>
+                    <div class="col pb-5 company-details">
+                        
                     </div>
                 </div>
             </header>
@@ -406,7 +308,7 @@ tbody tr td  {
                         <tr>
                             <th></th>
                             <th class="text-left">Order Information</th>
-                            <th class="text-right">HOUR PRICE</th>
+                            <th class="text-right"></th>
                             
                         </tr>
                     </thead>
@@ -417,62 +319,62 @@ tbody tr td  {
                                 User Name
                                 </h3>
                             </td>
-                            <td class="unit">{{ $n->user_name }}</td>
+                            <td class="unit"><%= service.name  %></td>
                             
                         </tr>
                         <tr>
                             <td class="no">02</td>
                             <td class="text-left">User Family</td>
-                            <td class="unit">{{ $n->user_family }}</td>
+                            <td class="unit"><%= service.family  %></td>
                           
                         </tr>
                         <tr>
                             <td class="no">03</td>
                             <td class="text-left">User Email</td>
-                            <td class="unit">{{ $n->email }}</td>
+                            <td class="unit"><%= service.email  %></td>
                             
                         </tr>
                         <tr>
                             <td class="no">04</td>
                             <td class="text-left">User Telegram Id</td>
-                            <td class="unit">{{ $n->telegram }}</td>
+                            <td class="unit"><%= service.telegram  %></td>
                             
                         </tr>
 
                           <tr>
                             <td class="no">05</td>
                             <td class="text-left">User Mobile</td>
-                            <td class="unit">{{ $n->mobile }}</td>
+                            <td class="unit"><%= service.mobile  %></td>
                             
                         </tr>
                           <tr>
                             <td class="no">06</td>
                             <td class="text-left">Category</td>
-                            <td class="unit">{{ $n->kind }}</td>
+                            <td class="unit"><%= service.service_kind  %></td>
                             
                         </tr>
                           <tr>
                             <td class="no">07</td>
                             <td class="text-left">Evidence</td>
-                            <td class="unit">{{ $n->type }}</td>
+                            <td class="unit"><%= service.service_type  %></td>
                             
                         </tr>
                           <tr>
                             <td class="no">08</td>
                             <td class="text-left">end Result By</td>
-                            <td class="unit">{{ $n->send_via }}</td>
+                            <td class="unit"><%= service.send_via  %></td>
                             
                         </tr>
                           <tr>
                             <td class="no">09</td>
                             <td class="text-left">Payment</td>
-                            <td class="unit">{{ $n->payment_status ? "done" : "not paid" }}</td>
+                            <td class="unit"><%= service.payment_status ? "done" : "none"  %></td>
                             
                         </tr>
                           <tr>
                             <td class="no">10</td>
                             <td class="text-left">Send Notification</td>
-                            <td class="unit">{{ $n->call_to_user ? "done" : "none" }}</td>
+                            <td class="unit"><%= service.call_to_user ? "done" : "none"  %></td>
                             
                         </tr>
                           <tr>
@@ -483,50 +385,44 @@ tbody tr td  {
                                                   <tr>
                             <td class="no">12</td>
                             <td class="text-left">Price</td>
-                            <td class="unit">{{ $n->price }} Rial</td>
+                            <td class="unit"><%= service.price  %> Rial</td>
                         </tr>
 
                           <tr>
                             <td class="no">13</td>
                             <td class="text-left">File</td>
-                            <td class="unit"> <?php
-
-
-
-                            	$file = $n->input;
-                            	$file_len = strlen($file);
-                            	if( $file_len !== 0 ) {
-                            		echo "<a download href=".$file."> download</a>";
-                            	} else {
-                            		echo "File Not Uploaded";
-                            		echo " - ";
-                            		echo "<a href=''> call To User </a>";
-                            	}
-
-
-                            ?>
-                            	
+                            <td class="unit"> 
+                            <button class="btn btn-primary ">
+                            	<a style="color:white" download  href="<%= server %>/file/<%=  service.service_file ? service.service_file.file_name : ''  %>" >download file</a>
+                                </button>
                             </td>
                         </tr>
                           <tr>
                             <td class="no">13</td>
                             <td class="text-left">Result</td>
                             <td class="unit">
-                            	<form id="upload_">
+                            	<form
+                                enctype="multipart/form-data"
+                                 id="upload_">
                             		<div style='height: 0px;width:0px; overflow:hidden;'>
-                            			<input id="upfile" name="file" type="file" value="upload"/>
+                            			<input id="upfile" name="singleFile" type="file"/>
                             		</div>
                             		<div id="uploadHandler" class="btn btn-primary"> Upload Result </div>
-                            		<input class="btn btn-secondary submit_btn" type="submit" name=" Send File">
+                            		<input class="btn btn-secondary submit_btn" type="submit" value=" Send File">
+                                    <script>
+                                    console.log('hooooooooo');
+                                    console.log('<%= service.service_result.file_name %>')
+                                    console.log('hooooooooo');
+                                    </script>
                             	</form>
-								<?php
-			if(strlen($n->result_input) !== 0) {
 
-					echo "<a class='btn btn-info mr-3 mt-2' href='$n->result_input'  download>";
-					echo " View Last File</a>";
+                                <%  if(service.service_result && service.service_result !== "") {  %>
+								 
+                                     <button style="margin-top:20px" class="btn btn-primary ">
+                            	<a style="color:white" download  href="<%= server %>/file/<%= service.service_result.file_name ? service.service_result.file_name : ''  %>" >download file</a>
+                                </button>
 
-                            	}
-								?>
+                                <% } %>
                             </td>
                         </tr>
                     </tbody>
@@ -534,51 +430,36 @@ tbody tr td  {
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>{{ $n->price }} Rial</td>
+                            <td><%= service.price  %> Rial</td>
                         </tr>
                         <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">TAX 16%</td>
-                            <?php                            	
-                            		
-                            	//The VAT rate / percentage.
-								$vat = 16;
- 
-								//The price, excluding VAT.
-								$priceExcludingVat = $n->price;
- 
-								//Calculate how much VAT needs to be paid.
-								$vatToPay = ($priceExcludingVat / 100) * $vat;
- 
-								//The total price, including VAT.
-								$totalPrice = $priceExcludingVat + $vatToPay;
-
-                            ?>
-                            <td> {{ $priceExcludingVat }} Rial</td>
+                            
+                            
+                            
+                            <td> <%= service.price %> Rial</td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">GRAND TOTAL</td>
-                            <td>{{ $totalPrice }} Rial</td>
+                            <td><%= service.price %> Rial</td>
                         </tr>
                     </tfoot>
                 </table>
                 <div class="thanks"></div>
                 <div class="notices">
                     <div>User Details:</div>
-                    <div class="notice">{{ $n->details }}</div>
+                    <div class="notice"> <%= service.details  %> </div>
                 </div>
 
                 <div class="pt-5 mt-3">
                 	<div class="jumbotron">
                 		<div id="sned_user" class="text-center btn btn-info w-100">Send Result To User</div>
-                		<?php
+                		
 
-                			if($n->call_to_user == 1) {
-                				echo "<span style='text-align:right;color:red'><i> sended before </i></span>";
-                			}
+                		<%	 if(service.call_to_user) {  %>
+                				<span style='text-align:right;color:red'><i> sended before </i></span>
+                		<%	}  %>
 
-                		?>
                 	</div>
                 </div>
             </main>
@@ -658,14 +539,16 @@ tbody tr td  {
 
     	window.uploaded_file = '';
 
-    	function update_data(url) {
+    	function update_data(file_id) {
     		var data = {
-    			url:url,
-    			id:{{$n->id}}
+    			data: {
+                    service_result: file_id
+                },
+    			id:'<%= service._id %>'
     		}
     		 $.ajax({
-    		 	url: '{{ route("update_form_result_file") }}',
-				type: 'POST',              
+    		 	url: '<%server%>/v1/services',
+				type: 'PUT',              
 				data: data,
 				success: function (data) {
 					console.log(data);
@@ -679,11 +562,15 @@ tbody tr td  {
     		 })
     	}
 
+        $('#uploadHandler').click(function(e) {
+			document.getElementById("upfile").click();
+		})
+
 
     	$("#sned_user").click(function() {
 
     		var id_ = {
-    			id: {{ $n->id }}
+    			id: '<%=service._id%>'
     		}
 
     		  $.ajax({
@@ -712,11 +599,6 @@ tbody tr td  {
 		    });
     	});
 
-
-		$('#uploadHandler').click(function(e) {
-			document.getElementById("upfile").click();
-		})
-
     	 $('#printInvoice').click(function(){
             Popup($('.invoice')[0].outerHTML);
             function Popup(data) 
@@ -730,9 +612,9 @@ tbody tr td  {
     					event.preventDefault();
     					var formData = new FormData($("#upload_")[0]);
     			
-		    			console.log(formData);
+		    			
 						    $.ajax({
-						        url: '{{ route("upload") }}',
+						        url: '<% server %>/upload',
 						        type: 'POST',              
 						        data: formData,
 						  		processData: false,
@@ -741,11 +623,11 @@ tbody tr td  {
 						        {
 						            console.log('success');
 						             window.uploaded_file = result;
-						             console.log(result);
-						             if(result == 'no') {
-						             	alert("please Insert File");
+						             console.log(result.uploadedFile._id);
+						             if(result.uploadedFile) {
+						             	update_data(result.uploadedFile._id);
 						             } else {
-						             	update_data(result);
+						             	alert('Please Upload Again, something has wrong')
 						             	window.location.refresh;
 						             }
 						             

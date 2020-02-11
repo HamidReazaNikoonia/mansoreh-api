@@ -40,6 +40,7 @@ const serviceSchema = new mongoose.Schema({
     type: String,
     enum: ['telegram', 'email', 'both'],
   },
+  price: Number,
   visited: {
     type: Boolean,
     default: false,

@@ -35,7 +35,7 @@ router.get('/dashboard', async (req, res, next) => {
 
 
 router.get('/dashboard/service/:id', async (req, res, next) => {
-  const service = await Services.findById(req.params.id);
+  const service = await Services.findById(req.params.id).populate('service_file service_result');
   res.render('dashboard/show_product', {
     service,
   });
