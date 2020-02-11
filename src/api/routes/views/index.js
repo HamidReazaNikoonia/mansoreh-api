@@ -1,6 +1,7 @@
 const express = require('express');
 const uploder = require('../../services/upload');
 const Upload = require('../../domain/upload/upload.model');
+const Services = require('../../domain/service/service.model');
 
 const router = express.Router();
 
@@ -23,6 +24,21 @@ router.get('/service/t/s', (req, res, next) => {
 
 router.get('/service/t/w', (req, res, next) => {
   res.render('services/tofel_writing');
+});
+
+router.get('/dashboard', async (req, res, next) => {
+  const services = await Services.find();
+  res.render('dashboard/index', {
+    services,
+  });
+});
+
+
+router.get('/dashboard/service/:id', async (req, res, next) => {
+  const service = await Services.findById(req.params.id);
+  res.render('dashboard/show_product', {
+    service,
+  });
 });
 
 

@@ -19,7 +19,9 @@ const error = require('../api/middlewares/error');
 const app = express();
 
 const SERVER_ADD = 'http://localhost:3000';
+const APP_NAME = process.env.APP_NAME || 'ELMA CENTER';
 app.locals.server = SERVER_ADD;
+app.locals.appName = APP_NAME;
 
 // request logging. dev: console | production: file
 app.use(morgan(logs));
