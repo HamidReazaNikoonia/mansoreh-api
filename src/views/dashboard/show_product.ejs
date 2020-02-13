@@ -554,6 +554,9 @@ tbody tr td  {
 
     	$("#sned_user").click(function() {
 
+            // Loading
+            $('#sned_user').text('Please Wait ...');
+
     		var id_ = {
     			id: '<%=service._id%>'
     		}
@@ -564,22 +567,21 @@ tbody tr td  {
 		        data: {},
 		        success: function(result)
 		        {
-		            console.log('success');
-		             console.log(result);
-                     alert('result sended successfully');
-                     document.location.reload(true);
-
-		             // please upload result first
+                    // please upload result first
 		             if(result.error) {
 		             	alert(result.error);
+                         $('#sned_user').text('Send Result To User');
 		             	return false;
 		             }
 
-		             
+                     $('#sned_user').text('Send Result To User');
+                     alert('result sended successfully');
+                     document.location.reload(true);
 		        },
 		        error: function(data)
 		        {
 		            console.log(data);
+                    $('#sned_user').text('Send Result To User');
 		            alert("some thing wrong , please try again");
 		        }
 		    });
@@ -597,6 +599,15 @@ tbody tr td  {
     	 				$('#upload_').submit(function(event) {
     					event.preventDefault();
     					var formData = new FormData($("#upload_")[0]);
+                        console.log('form_data');
+                        var fileContainer = $('#upfile');
+                        // console.log(fileContainer[0].files.length);
+                        if(fileContainer[0].files.length == 0) {
+                            alert("Please Select file First");
+                            return false;
+                        }
+                        $('.submit_btn').prop('value', 'uploading ...')
+                         .addClass('btn-warning');
     			
 		    			
 						    $.ajax({
@@ -611,15 +622,21 @@ tbody tr td  {
 						             window.uploaded_file = result;
 						             console.log(result.uploadedFile._id);
 						             if(result.uploadedFile) {
+                                         $('.submit_btn').prop('value', 'send File')
+                                            .removeClass('btn-warning');
 						             	update_data(result.uploadedFile._id);
 						             } else {
+                                         $('.submit_btn').prop('value', 'send File')
+                                            .removeClass('btn-warning');
 						             	alert('Please Upload Again, something has wrong')
-						             	window.location.refresh;
+						             	// window.location.refresh;
 						             }
 						             
 						        },
 						        error: function(data)
 						        {
+                                 $('.submit_btn').prop('value', 'send File')
+                                            .removeClass('btn-warning');   
 						            console.log(data);
 						            alert("some thing wrong , please try again");
 						        }
