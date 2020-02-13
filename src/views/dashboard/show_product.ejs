@@ -91,7 +91,6 @@
 }
 
 .invoice main .thanks {
-    margin-top: -100px;
     font-size: 2em;
     margin-bottom: 50px
 }
@@ -156,7 +155,12 @@
     border: none
 }
 
-.invoice table tfoot td {
+#tfoot ul {
+    display:block;
+    list-style: none;
+}
+
+#tfoot li {
     background: 0 0;
     border-bottom: none;
     white-space: nowrap;
@@ -166,17 +170,17 @@
     border-top: 1px solid #aaa
 }
 
-.invoice table tfoot tr:first-child td {
+ #tfoot ul:first-child li {
     border-top: none
 }
 
-.invoice table tfoot tr:last-child td {
+ #tfoot ul:last-child li {
     color: #3989c6;
     font-size: 1.4em;
     border-top: 1px solid #3989c6
 }
 
-.invoice table tfoot tr td:first-child {
+ #tfoot ul li:first-child {
     border: none
 }
 
@@ -258,7 +262,7 @@ tbody tr td  {
         <hr>
     </div>
     <div class="invoice overflow-auto">
-        <div style="min-width: 600px">
+        <div style="min-width: 350px">
             <header>
                 <div class="row">
                     <div class="col">
@@ -303,18 +307,18 @@ tbody tr td  {
 
 
                 </div>
-                <table border="0" cellspacing="0" cellpadding="0">
+                <div class="row">
+                <div class="col-md-12">
+                  <table border="0" cellspacing="0" cellpadding="0">
                     <thead>
                         <tr>
                             <th></th>
                             <th class="text-left">Order Information</th>
-                            <th class="text-right"></th>
                             
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="no">01</td>
                             <td class="text-left"><h3>
                                 User Name
                                 </h3>
@@ -323,73 +327,61 @@ tbody tr td  {
                             
                         </tr>
                         <tr>
-                            <td class="no">02</td>
                             <td class="text-left">User Family</td>
                             <td class="unit"><%= service.family  %></td>
                           
                         </tr>
                         <tr>
-                            <td class="no">03</td>
                             <td class="text-left">User Email</td>
                             <td class="unit"><%= service.email  %></td>
                             
                         </tr>
                         <tr>
-                            <td class="no">04</td>
                             <td class="text-left">User Telegram Id</td>
                             <td class="unit"><%= service.telegram  %></td>
                             
                         </tr>
 
                           <tr>
-                            <td class="no">05</td>
                             <td class="text-left">User Mobile</td>
                             <td class="unit"><%= service.mobile  %></td>
                             
                         </tr>
                           <tr>
-                            <td class="no">06</td>
                             <td class="text-left">Category</td>
                             <td class="unit"><%= service.service_kind  %></td>
                             
                         </tr>
                           <tr>
-                            <td class="no">07</td>
                             <td class="text-left">Evidence</td>
                             <td class="unit"><%= service.service_type  %></td>
                             
                         </tr>
                           <tr>
-                            <td class="no">08</td>
                             <td class="text-left">end Result By</td>
                             <td class="unit"><%= service.send_via  %></td>
                             
                         </tr>
                           <tr>
-                            <td class="no">09</td>
                             <td class="text-left">Payment</td>
                             <td class="unit"><%= service.payment_status ? "done" : "none"  %></td>
                             
                         </tr>
                           <tr>
-                            <td class="no">10</td>
                             <td class="text-left">Send Notification</td>
                             <td class="unit"><%= service.call_to_user ? "done" : "none"  %></td>
                             
                         </tr>
                           <tr>
-                            <td class="no">11</td>
                             <td class="text-left">Payment Ref</td>
                             <td class="unit"></td>
                         </tr>
-                                                  <tr>
-                            <td class="no">12</td>
+                        <tr>
                             <td class="text-left">Price</td>
                             <td class="unit"><%= service.price  %> Rial</td>
                         </tr>
 
                           <tr>
-                            <td class="no">13</td>
                             <td class="text-left">File</td>
                             <td class="unit"> 
                             <button class="btn btn-primary ">
@@ -398,7 +390,6 @@ tbody tr td  {
                             </td>
                         </tr>
                           <tr>
-                            <td class="no">13</td>
                             <td class="text-left">Result</td>
                             <td class="unit">
                             	<form
@@ -409,11 +400,6 @@ tbody tr td  {
                             		</div>
                             		<div id="uploadHandler" class="btn btn-primary"> Upload Result </div>
                             		<input class="btn btn-secondary submit_btn" type="submit" value=" Send File">
-                                    <script>
-                                    console.log('hooooooooo');
-                                    console.log('<%= service.service_result.file_name %>')
-                                    console.log('hooooooooo');
-                                    </script>
                             	</form>
 
                                 <%  if(service.service_result && service.service_result !== "") {  %>
@@ -426,25 +412,24 @@ tbody tr td  {
                             </td>
                         </tr>
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">SUBTOTAL</td>
-                            <td><%= service.price  %> Rial</td>
-                        </tr>
-                        <tr>
-                            
-                            
-                            
-                            <td> <%= service.price %> Rial</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"></td>
-                            <td colspan="2">GRAND TOTAL</td>
-                            <td><%= service.price %> Rial</td>
-                        </tr>
-                    </tfoot>
                 </table>
+                </div>
+
+                <div class="col-md-12" style="padding-top:100px">
+                 <div id="tfoot">
+                        <ul>
+                            <li colspan="2">SUBTOTAL</li>
+                            <li><%= service.price  %> Rial</li>
+                        </ul>
+                        
+                        <ul>
+                            <li colspan="2">GRAND TOTAL</li>
+                            <li><%= service.price %> Rial</li>
+                        </ul>
+                    </div>
+                </div>
+
+                </div>
                 <div class="thanks"></div>
                 <div class="notices">
                     <div>User Details:</div>
@@ -574,21 +559,22 @@ tbody tr td  {
     		}
 
     		  $.ajax({
-		        url: '{{ route("send_result_to_user") }}',
+		        url: `<%=server%>/dashboard/service/send_result/${id_.id}`,
 		        type: 'POST',              
-		        data: id_,
+		        data: {},
 		        success: function(result)
 		        {
 		            console.log('success');
 		             console.log(result);
+                     alert('result sended successfully');
+                     document.location.reload(true);
 
 		             // please upload result first
-		             if(result == "01") {
-		             	alert("Please Upload Result First");
+		             if(result.error) {
+		             	alert(result.error);
 		             	return false;
 		             }
 
-		             alert(result);
 		             
 		        },
 		        error: function(data)
