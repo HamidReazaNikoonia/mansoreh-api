@@ -39,7 +39,11 @@
     "url": "git@github.com:danielfsousa/express-rest-es2017-boilerplate.git"
   },
   "nodemonConfig": {
-    "ignore": ["storage", "docs/*", "src/public/*"]
+    "ignore": [
+      "storage",
+      "docs/*",
+      "src/public/*"
+    ]
   },
   "keywords": [
     "express",
@@ -93,6 +97,8 @@
     "passport-jwt": "4.0.0",
     "pm2": "^4.2.0",
     "pug": "^2.0.4",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "uuid": "^3.1.0",
     "winston": "^3.1.0"
   },

@@ -3,6 +3,7 @@ const uploder = require('../../services/upload');
 const Upload = require('../../domain/upload/upload.model');
 const Services = require('../../domain/service/service.model');
 const checkForExist = require('../../services/core/checkForExist');
+const ZarinpalCheckout = require('../../services/payment');
 
 const router = express.Router();
 
@@ -10,6 +11,8 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   res.render('index');
 });
+
+// Services Pages
 
 router.get('/service/i/w', (req, res, next) => {
   res.render('services/ielts_writing');
@@ -27,11 +30,18 @@ router.get('/service/t/w', (req, res, next) => {
   res.render('services/tofel_writing');
 });
 
+
+// dashboard routes
+
 router.get('/dashboard', async (req, res, next) => {
-  const services = await Services.find();
-  res.render('dashboard/index', {
-    services,
-  });
+  try {
+    const services = await Services.find();
+    res.render('dashboard/index', {
+      services,
+    });
+  } catch (e) {
+    next(e);
+  }
 });
 
 
@@ -105,6 +115,33 @@ router.post('/dashboard/service/send_result/:id', async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+});
+
+
+// Upload routes
+
+
+router.post('/test', (req, res, next) => {
+  const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
+  zarinpal.PaymentRequest({
+    Amount: '1000',
+    CallbackURL: 'http://siamak.us',
+    Description: 'Hello NodeJS API.',
+    Email: 'hi@siamak.work',
+    Mobile: '09120000000',
+  }).then((response) => {
+    if (response.url && response.status == 100) {
+      const callBackUrl = response.url || false;
+
+      if (callBackUrl) {
+        res.redirect(callBackUrl);
+      }
+    } else {
+      res.json({
+        error: '',
+      });
+    }
+  });
 });
 
 
