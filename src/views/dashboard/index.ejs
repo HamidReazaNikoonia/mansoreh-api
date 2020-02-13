@@ -25,6 +25,18 @@
     <!-- Custom styles for this template-->
     <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
 
+    <style>
+       tr:hover {
+          opacity:0.6;
+          color:red;
+          transition: all .6s ease;
+       }
+
+       tr {
+         transition: all 0.3s ease;
+       }
+    </style>
+
   </head>
 
   <body style="font-family: 'Karla', sans-serif" id="page-top">
@@ -136,13 +148,10 @@
                   </tfoot>
                   <tbody>
                     <%  services.map(service => {    %>
-                      
-                      <tr <%= service.visited ? "" : 'class="new"'  %> >
-                        
+                      <tr onClick="goToProduct('<%= service._id  %>')" <%= service.visited ? "" : 'class=new'  %> >
+                       
                       <td>
-                        <a style="z-index:999999" href="<%=server%>/dashboard/service/<%= service._id  %>">
                           <%=  service.name %>
-                        </a>
                       </td>
                       <td>
                           <%=  service.family  %>
@@ -163,7 +172,7 @@
                       <td>
                            <%= service.visited  ? "seen" : "new" %>
                       </td>
-
+                    
                     </tr>
                     <%  });   %>
 
@@ -173,7 +182,7 @@
               </div>
             </div>
             <div class="card-footer small text-muted">
-              <a href="{{ url('/admin   ') }}">refresh data</a>
+              <a href="">refresh data</a>
             </div>
           </div>
 
@@ -326,6 +335,12 @@ var myLineChart = new Chart(ctx, {
   }
 });
 
+
+
+function goToProduct(id) {
+  console.log(id);
+  window.location.href = `<%=server%>/dashboard/service/${id}`;
+}
       </script>
 
   </body>

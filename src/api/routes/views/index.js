@@ -36,10 +36,20 @@ router.get('/dashboard', async (req, res, next) => {
 
 
 router.get('/dashboard/service/:id', async (req, res, next) => {
-  const service = await Services.findById(req.params.id).populate('service_file service_result');
-  res.render('dashboard/show_product', {
-    service,
-  });
+  try {
+    const data = {
+      visited: true,
+    };
+    // change product (visited) status
+    await Services.findByIdAndUpdate(req.params.id, data);
+    const service = await Services.findById(req.params.id).populate('service_file service_result');
+
+    res.render('dashboard/show_product', {
+      service,
+    });
+  } catch (e) {
+    next(e);
+  }
 });
 
 
