@@ -121,28 +121,28 @@ router.post('/dashboard/service/send_result/:id', async (req, res, next) => {
 // Upload routes
 
 
-router.post('/test', (req, res, next) => {
-  const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
-  zarinpal.PaymentRequest({
-    Amount: '1000',
-    CallbackURL: 'http://siamak.us',
-    Description: 'Hello NodeJS API.',
-    Email: 'hi@siamak.work',
-    Mobile: '09120000000',
-  }).then((response) => {
-    if (response.url && response.status == 100) {
-      const callBackUrl = response.url || false;
+// router.post('/test', (req, res, next) => {
+//   const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
+//   zarinpal.PaymentRequest({
+//     Amount: '1000',
+//     CallbackURL: 'http://siamak.us',
+//     Description: 'Hello NodeJS API.',
+//     Email: 'hi@maid.work',
+//     Mobile: '09120000000',
+//   }).then((response) => {
+//     if (response.url && response.status == 100) {
+//       const callBackUrl = response.url || false;
 
-      if (callBackUrl) {
-        res.redirect(callBackUrl);
-      }
-    } else {
-      res.json({
-        error: '',
-      });
-    }
-  });
-});
+//       if (callBackUrl) {
+//         res.redirect(callBackUrl);
+//       }
+//     } else {
+//       res.json({
+//         error: '',
+//       });
+//     }
+//   });
+// });
 
 
 router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
