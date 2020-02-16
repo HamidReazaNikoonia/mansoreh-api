@@ -137,8 +137,15 @@
 
 
           <div class="form-group">
-            <label for="exampleFormControlFile1">Upload Book</label>
-            <input type="file" name="book_file" class="form-control-file" id="exampleFormControlFile1">
+          <form
+           enctype="multipart/form-data"
+           id="book_uploader"
+          >
+          
+            <label for="book_uploaderinput">Upload Book</label>
+            <input id="book_uploaderinput" type="file" name="singleFile" class="form-control-file">
+            <input type="submit" class="btn btn-primary" value="send" />
+            </form>
           </div>
 
 
@@ -203,22 +210,46 @@
 
     <script>
 
-    var coverImage = null;
 
-    $('#cover_image').submit(function(e) {
-        if ($('#cover-image-uploader')[0].files.length == 0) {
-	  alert('please insert file first !');
-	  return false;
-  }
+    var fileContainer = {
+        coverImage: null,
+        fileContent: null,
+    }
+
+
+// Upload cover Image
+    $('#cover_image').submit(async function(e) {
         e.preventDefault();
-        uploder();
+
+        if ($('#cover-image-uploader')[0].files.length == 0) {
+	        alert('please insert file first !');
+	        return false;
+        }
+        
+         await uploder($(this), 'coverImage');
     })
 
 
-        function uploder() {
+// Upload Book File 
+ $('#book_uploader').submit(async function(e) {
+     e.preventDefault();
+
+        if ($('#book_uploaderinput')[0].files.length == 0) {
+	        alert('please insert file first !');
+	        return false;
+        }
+        
+        await uploder($(this), 'fileContent');
+
+    })
+
+
+// uploader helper
+        function uploder(ele, type) {
             // var imagefile = document.querySelector('#file');
             // var fileUplod = element;
-            const formData = new FormData($("#cover_image")[0]);
+            const formData = new FormData(ele[0]);
+            
             $.ajax({
                 url: '<%=server%>/upload',
                 type: 'POST',
@@ -227,8 +258,11 @@
                 contentType: false,
                 success: function(res) {
                   console.log('success');
-                  if(res.uploadedFile) {
-                      coverImage = res.uploadedFile._id;
+                  console.log(String(type));
+                  console.log(fileContainer[`${type}`]);
+                  if(res.uploadedFile && fileContainer[`${type}`] !== undefined) {
+                      fileContainer[`${type}`] = res.uploadedFile._id;
+                      return true;
                   } else {
                       alert('your file cant upload, please try again');
                       return false;
@@ -236,6 +270,7 @@
                 },
                 error: function(err) {
                     console.log('error');
+                    alert('your file cant upload, some errors happen in server');
                     console.log(err.response || err);
                     
                 }
@@ -245,6 +280,11 @@
 
         $('#submit_form').click(function(e) {
             e.preventDefault();
+
+            if(!fileContainer.fileContent) {
+                alert('please upload book file');
+                return false;
+            }
 
            var name = $('input[name="name"]').val();
             if(name == "" || name.length == 0) {
@@ -284,9 +324,9 @@
 
             }
 
-            if(coverImage) {
+            if(fileContainer.coverImage) {
                 data.cover = {
-                    image: coverImage
+                    image: fileContainer.coverImage
                 }
             }
 
