@@ -145,6 +145,17 @@ router.post('/dashboard/service/send_result/:id', async (req, res, next) => {
 // });
 
 
+// dashboard book
+
+
+router.get('/dashboard/book', async (req, res, next) => {
+  res.render('dashboard/book');
+});
+
+router.get('/dashboard/book/create', async (req, res, next) => {
+  res.render('dashboard/book/create');
+});
+
 router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
   try {
     const { file } = req;
@@ -154,6 +165,7 @@ router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
         code: '400',
         message: 'Please upload file',
       });
+      return;
     }
 
     const fileUploded = {

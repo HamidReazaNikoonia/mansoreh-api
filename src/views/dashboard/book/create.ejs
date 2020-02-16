@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="author" content="">
+
+    <title>Add Book</title>
+
+   
+    <!-- Bootstrap core CSS-->
+    <link href="<%=server%>/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="<%=server%>/static/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="<%=server%>/static/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <%- include('../layout/header')  %>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <%-   include('../layout/side_bar')  %>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Add Book</li>
+          </ol>
+
+          <!-- Page Content -->
+          <h1 class="ml-5" style="font-family: monospace;">Save Information For Book</h1>
+          
+          <hr>
+          
+        
+          <div 
+          enctype="multipart/form-data"
+          id="createbook"
+          >
+
+              
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Name </label>
+            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+           <small id="emailHelp" class="form-text text-muted">this name used for name of book</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">short Details</label>
+            <textarea name="short_details" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <small id="emailHelp" class="form-text text-muted">maximum word 50</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlTextarea2">Details</label>
+            <textarea name="details" class="form-control" id="exampleFormControlTextarea2" rows="6"></textarea>
+            <small id="emailHelp" class="form-text text-muted">maximum word 150</small>
+          </div>
+
+           <div class="form-group">
+            <label for="exampleFormControlTextarea3">demo page NO 1</label>
+            <textarea name="details_1" class="form-control" id="exampleFormControlTextarea3" rows="10"></textarea>
+            <small id="emailHelp" class="form-text text-muted">optional</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleFormControlTextarea4">demo page NO 2</label>
+            <textarea name="details_2" class="form-control" id="exampleFormControlTextarea4" rows="10"></textarea>
+            <small id="emailHelp" class="form-text text-muted">optional</small>
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleFormControlTextarea5">demo page NO 3</label>
+            <textarea name="details_3" class="form-control" id="exampleFormControlTextarea5" rows="10"></textarea>
+            <small id="emailHelp" class="form-text text-muted">optional</small>
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail2">price</label>
+            <input type="number" name="price" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter price">
+           <small id="emailHelp" class="form-text text-muted">Rial</small>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail12">Cover Image</label>
+            <form
+            enctype="multipart/form-data"
+            id="cover_image"
+            >
+            <input type="file" id="cover-image-uploader" name="singleFile" class="btn btn-primary form-control">
+            <input type="submit"  class="btn btn-primary" value="submit">
+            </form>
+            <small id="emailHelp" class="form-text text-muted">Image Must In 300 * 400</small>
+            
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail3">author</label>
+            <input type="text" name="author" class="form-control" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="Enter author">
+          </div>
+
+
+         
+
+
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">category</label>
+            <select class="form-control" id="exampleFormControlSelect1" name="category">
+              <option value="ielts">IELTS</option>
+              <option value="tofel">TOFEL</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="exampleFormControlFile1">Upload Book</label>
+            <input type="file" name="book_file" class="form-control-file" id="exampleFormControlFile1">
+          </div>
+
+
+          <div class="form-group">
+            <input id="submit_form" type="submit"  value="submit">
+          </div>
+
+      </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+     <script src="<%=server%>/static/js/jquery.min.js"></script>
+    <script src="<%=server%>/static/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaSript-->
+    <script src="<%=server%>/static/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<%=server%>/staticjs/sb-admin.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <script>
+
+    var coverImage = null;
+
+    $('#cover_image').submit(function(e) {
+        if ($('#cover-image-uploader')[0].files.length == 0) {
+	  alert('please insert file first !');
+	  return false;
+  }
+        e.preventDefault();
+        uploder();
+    })
+
+
+        function uploder() {
+            // var imagefile = document.querySelector('#file');
+            // var fileUplod = element;
+            const formData = new FormData($("#cover_image")[0]);
+            $.ajax({
+                url: '<%=server%>/upload',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(res) {
+                  console.log('success');
+                  if(res.uploadedFile) {
+                      coverImage = res.uploadedFile._id;
+                  } else {
+                      alert('your file cant upload, please try again');
+                      return false;
+                  }
+                },
+                error: function(err) {
+                    console.log('error');
+                    console.log(err.response || err);
+                    
+                }
+            })
+        }
+
+
+        $('#submit_form').click(function(e) {
+            e.preventDefault();
+
+           var name = $('input[name="name"]').val();
+            if(name == "" || name.length == 0) {
+                alert('Please Insert name');
+                return false;
+            }
+
+            var details = [];
+            var details_1 = $('textarea[name="details_1"]').val();
+            var details_2 = $('textarea[name="details_2"]').val();
+            var details_3 = $('textarea[name="details_3"]').val();
+
+            if(details_1 !== "" && details_1.length !== 0) {
+                details.push(details_1);
+            }
+
+            if(details_2 !== "" && details_2.length !== 0) {
+                details.push(details_2);
+            }
+
+            if(details_3 !== "" && details_3.length !== 0) {
+                details.push(details_3);
+            }
+
+            
+            
+
+            var data = {
+                name:  $('input[name="name"]').val(),
+                short_details:  $('textarea[name="short_details"]').val(),
+                details:  $('textarea[name="details"]').val(),
+                demo_page: details,
+                category:  $('select[name="category"]').val(),
+                author:  $('input[name="author"]').val(),
+                price:  $('input[name="price"]').val(),
+                file_url: '5e48cfc998b0c59089c3e4e4',
+
+            }
+
+            if(coverImage) {
+                data.cover = {
+                    image: coverImage
+                }
+            }
+
+            
+            axios.post('<%=server%>/v1/books', data)
+            .then(res => {
+                console.log(res)
+                console.log('res')
+            })
+            .catch(e => {
+                console.log(e.response || e)
+            })
+        })
+    </script>
+
+  </body>
+
+</html>

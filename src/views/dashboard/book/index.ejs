@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+
+    <title>SB Admin - Blank Page</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="<%=server%>/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="<%=server%>/static/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="<%=server%>/static/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+    <%- include('../layout/header')  %>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <%-   include('../layout/side_bar')  %>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Book List</li>
+          </ol>
+
+          <!-- Page Content -->
+          <h1>Book Lists</h1>
+          <hr>
+          <p></p>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <div class="d-flex justify-content-between flex-xm-column">
+                <div>
+                    <i class="fas fa-table"></i>
+                    All books
+                </div>
+
+                <div>
+                  <a href="{{ route('books-store-form') }}">
+                    <i class="fas fa-plus-square"></i>
+                    Create New Book
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Short Details</th>
+                      <th>Author</th>
+                      <th>Price</th>
+                      <th>File</th>
+                      <th>Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Short Details</th>
+                      <th>Author</th>
+                      <th>Price</th>
+                      <th>File</th>
+                      <th>Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+
+                    
+                  
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">
+              <a href="">refresh data</a>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2020</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<%=server%>/static/js/jquery.min.js"></script>
+    <script src="<%=server%>/static/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaSript-->
+    <script src="<%=server%>/static/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<%=server%>/staticjs/sb-admin.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+    
+     function getApi(url) {
+        axios.get(url)
+          .then(res => { 
+            if(res.data) {
+              let books_ = res.data.books || [];
+              mapContent(books_);
+            } else {
+              alert('some thing happen, please try again');
+            }
+            })
+          .catch(e => {
+            console.log(e);
+            alert('some thing happen, please try again');
+          })
+     }
+
+     getApi('<%=server%>/v1/books');
+
+     function mapContent(data) {
+       var content = [];
+       data.map(book => {
+           var template = `<tr>
+                        
+                        <td>${ book.name || '' }</td>
+                        <td>${ book.short_details || ''}</td>
+                        <td>${ book.author || ''}</td>
+                        ${ !book.price ? '<td> Free </td>' : `<td>${ book.price || ''} Rial</td>`}
+                        <td>
+                          <a href="<%=server%>/file/${book.file_url ? book.file_url.file_name : ''}" download > Downlod  </a>
+                        </td>
+                        <td>${ book.createdAt || ''}</td>
+                        <td class="text-center"> 
+                          <a href="{{ route('edit_form', $book->id) }}" style="color:gray">
+                            <i class="fa fa-edit "></i>
+                          </a>
+                        </td>
+                        <td class="text-center">
+                          <form method="POST" action="{{ route('delete_book') }}" >
+                            @csrf
+                              <input type="hidden" name="id" value="{{ $book->id }}">
+                              <input class="btn btn-danger" type="submit" style="color:white;opacity: 0.7" value="Delete">
+                          </form>
+                         
+                        </td>
+                      </tr>`;
+                      content.push(template);
+       });
+
+       $('tbody').append(content);
+     }
+
+      
+
+                      // $('tbody').append(template)
+    </script>
+
+  </body>
+
+</html>
