@@ -9,7 +9,7 @@
     
     
 
-    <title>SB Admin - Blank Page</title>
+    <title><%= appName %></title>
 
     <!-- Bootstrap core CSS-->
     <link href="<%=server%>/static/css/bootstrap.css" rel="stylesheet">
@@ -43,11 +43,11 @@
             <li class="breadcrumb-item">
               <a href="">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Book List</li>
+            <li class="breadcrumb-item active">Books List</li>
           </ol>
 
           <!-- Page Content -->
-          <h1>Book Lists</h1>
+          <h1>Books List</h1>
           <hr>
           <p></p>
 
@@ -60,7 +60,7 @@
                 </div>
 
                 <div>
-                  <a href="{{ route('books-store-form') }}">
+                  <a href="<%=server%>/dashboard/book/create">
                     <i class="fas fa-plus-square"></i>
                     Create New Book
                   </a>
@@ -192,18 +192,16 @@
                         <td>
                           <a href="<%=server%>/file/${book.file_url ? book.file_url.file_name : ''}" download > Downlod  </a>
                         </td>
-                        <td>${ book.createdAt || ''}</td>
+                        <td>${ book.createdAt.toLocaleString() || ''}</td>
                         <td class="text-center"> 
-                          <a href="{{ route('edit_form', $book->id) }}" style="color:gray">
+                          <a href="<%=server%>/dashboard/book/edit/${book._id}" style="color:gray">
                             <i class="fa fa-edit "></i>
                           </a>
                         </td>
                         <td class="text-center">
-                          <form method="POST" action="{{ route('delete_book') }}" >
-                            @csrf
-                              <input type="hidden" name="id" value="{{ $book->id }}">
-                              <input class="btn btn-danger" type="submit" style="color:white;opacity: 0.7" value="Delete">
-                          </form>
+                          
+                              <input onclick="deleteBook('${book._id}')" class="btn btn-danger" type="submit" style="color:white;opacity: 0.7" value="Delete">
+                          
                          
                         </td>
                       </tr>`;
@@ -211,6 +209,27 @@
        });
 
        $('tbody').append(content);
+     }
+
+
+     function deleteBook(id) {
+       var r = confirm("Are you sure ?");
+       if(r) {
+         $.ajax({
+           type:'DELETE',
+           url: '<%=server%>/v1/books/'+ id,
+           success: function(res) {
+             console.log(res);
+             $('tbody').empty();
+             getApi('<%=server%>/v1/books');
+           },
+           error: function(err) {
+             console.log('error');
+             console.log(err);
+
+           }
+         })
+       }
      }
 
       

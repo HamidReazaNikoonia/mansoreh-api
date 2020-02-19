@@ -26,6 +26,19 @@
     <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
 
 
+    <style>
+      .form-group {
+        padding-bottom:40px;
+      }
+
+      .form-group label {
+        margin-left:12px;
+        font-family: 'Muli';
+        font-weight: 600;
+      }
+    </style>
+
+
   </head>
 
   <body id="page-top">
@@ -46,7 +59,7 @@
             <li class="breadcrumb-item">
               <a href="index.html">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Add Book</li>
+            <li class="breadcrumb-item active">Edit Book</li>
           </ol>
 
           <!-- Page Content -->
@@ -111,11 +124,6 @@
           </div>
 
           <div class="form-group">
-          <% if(book.cover.image) {  %>
-          <div>
-            <a download href="<%=server%>/file/<%=book.cover.image.file_name%>">download last image</a>
-          </div>
-          <%   } %>
             <label for="exampleInputEmail12">Cover Image</label>
             <form
             enctype="multipart/form-data"
@@ -151,14 +159,14 @@
            enctype="multipart/form-data"
            id="book_uploader"
           >
-          <% if(book.file_url) {  %>
-          <div>
-            <a download href="<%=server%>/file/<%=book.file_url.file_name%>">download last file</a>
-          </div>
-          <%   } %>
             <label for="book_uploaderinput">Upload Book</label>
             <input id="book_uploaderinput" type="file" name="singleFile" class="form-control-file">
             <input type="submit" class="btn btn-primary" value="Press Here For Upload File" />
+            <% if(book.file_url) {  %>
+          <div>
+            <a  download href="<%=server%>/file/<%=book.file_url.file_name%>">download last file</a>
+          </div>
+          <%   } %>
             </form>
           </div>
 
@@ -241,6 +249,8 @@
 	        alert('please insert file first !');
 	        return false;
         }
+
+        $('#cover_image > input[type="submit"]').attr('value', 'please wait ...');
         
          await uploder($(this), 'coverImage');
     })
@@ -254,6 +264,8 @@
 	        alert('please insert file first !');
 	        return false;
         }
+
+        $('#book_uploader > input[type="submit"]').attr('value', 'please wait ...');
         
         await uploder($(this), 'fileContent');
 
@@ -274,18 +286,20 @@
                 contentType: false,
                 success: function(res) {
                   console.log('success');
-                  console.log(String(type));
-                  console.log(fileContainer[`${type}`]);
                   if(res.uploadedFile && fileContainer[`${type}`] !== undefined) {
                       fileContainer[`${type}`] = res.uploadedFile._id;
+                       ele.find('input[type="submit"]').attr('value', 'Press Here For Upload File');
+                      alert('your file uploaded successfully');
                       return true;
                   } else {
+                    ele.find('input[type="submit"]').attr('value', 'Press Here For Upload File');
                       alert('your file cant upload, please try again');
                       return false;
                   }
                 },
                 error: function(err) {
                     console.log('error');
+                    ele.find('input[type="submit"]').attr('value', 'Press Here For Upload File')
                     alert('your file cant upload, some errors happen in server');
                     console.log(err.response || err);
                     
@@ -300,7 +314,7 @@
             var book_id = "<%= book._id %>";
             if(!book_id || book_id == "") {
                 alert('please try again');
-                window.location.href = "<%=server%>/dashboard";
+                window.location.href = "<%=server%>/dashboard/book";
             }
 
             // if(!fileContainer.fileContent) {

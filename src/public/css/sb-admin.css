@@ -521,12 +521,11 @@ div.dataTables_wrapper div.dataTables_length select {
 
         
 
-        input:not['type="submit"']:focus,
+        input:not([type="submit"]):focus,
         textarea:focus {
           outline: none;
-          border: 5px solid #DC2669;
+          border: 3px solid #DC2669;
           transition: 0.5s;
-
         }
 
         select:focus {

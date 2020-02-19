@@ -353,6 +353,9 @@
             axios.post('<%=server%>/v1/books', data)
             .then(res => {
                 console.log(res)
+                if(res.data) {
+                  window.location.href = "<%=server%>/dashboard/book";
+                }
                 console.log('res')
             })
             .catch(e => {
