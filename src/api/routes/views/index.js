@@ -2,6 +2,7 @@ const express = require('express');
 const uploder = require('../../services/upload');
 const Upload = require('../../domain/upload/upload.model');
 const Services = require('../../domain/service/service.model');
+const Book = require('../../domain/book/book.model');
 const checkForExist = require('../../services/core/checkForExist');
 const ZarinpalCheckout = require('../../services/payment');
 
@@ -155,6 +156,29 @@ router.get('/dashboard/book', async (req, res, next) => {
 router.get('/dashboard/book/create', async (req, res, next) => {
   res.render('dashboard/book/create');
 });
+
+
+router.get('/dashboard/book/edit/:id', async (req, res, next) => {
+  try {
+    if (!req.params.id) {
+      res.json({
+        error: 'book not exist',
+      });
+    }
+    const book = await Book.findById(req.params.id).populate('cover.image file_url');
+
+    if (book) {
+      res.render('dashboard/book/edit', { book });
+    } else {
+      res.json({
+        error: 'book not exist',
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
   try {

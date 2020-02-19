@@ -11,8 +11,15 @@ const bookSchema = new mongoose.Schema({
   demo_page: [String],
   price: Number,
   author: String,
+  category: {
+    type: String,
+    enum: ['ielts', 'tofel'],
+  },
   cover: {
-    image: mongoose.Schema.Types.ObjectId,
+    image: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Upload',
+    },
     color: {
       type: String,
       default: 'null',

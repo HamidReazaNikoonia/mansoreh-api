@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="author" content="">
 
-    <title>Add Book</title>
+    <title>Edit Book</title>
 
    
     <!-- Bootstrap core CSS-->
@@ -25,17 +25,6 @@
     <!-- Custom styles for this template-->
     <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
 
-    <style>
-      .form-group {
-        padding-bottom:40px;
-      }
-
-      .form-group label {
-        margin-left:12px;
-        font-family: 'Muli';
-        font-weight: 600;
-      }
-    </style>
 
   </head>
 
@@ -61,7 +50,7 @@
           </ol>
 
           <!-- Page Content -->
-          <h1 class="ml-5" style="font-family:'Muli',sans-serif">Save Information For Book</h1>
+          <h1 class="ml-5" style="font-family:'Muli',sans-serif">Edit Information For Book</h1>
           
           <hr>
           
@@ -75,55 +64,64 @@
 
           <div class="form-group">
             <label for="exampleInputEmail1">Name </label>
-            <input type="text" name="name"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+            <input value="<%= book.name %>" type="text" name="name" class="" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
            <small id="emailHelp" class="form-text text-muted">this name used for name of book</small>
           </div>
 
           <div class="form-group">
             <label for="exampleFormControlTextarea1">short Details</label>
-            <textarea name="short_details"  id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea name="short_details"  id="exampleFormControlTextarea1" rows="3"><%= book.short_details || '' %>
+            </textarea>
             <small id="emailHelp" class="form-text text-muted">maximum word 50</small>
           </div>
 
           <div class="form-group">
             <label for="exampleFormControlTextarea2">Details</label>
-            <textarea name="details"  id="exampleFormControlTextarea2" rows="6"></textarea>
+            <textarea name="details"  id="exampleFormControlTextarea2" rows="6"><%= book.details || '' %>
+            </textarea>
             <small id="emailHelp" class="form-text text-muted">maximum word 150</small>
           </div>
 
            <div class="form-group">
             <label for="exampleFormControlTextarea3">demo page NO 1</label>
-            <textarea name="details_1"  id="exampleFormControlTextarea3" rows="10"></textarea>
+            <textarea name="details_1" id="exampleFormControlTextarea3" rows="10"><%= book.demo_page[0] ? book.demo_page[0] : '' %>
+            </textarea>
             <small id="emailHelp" class="form-text text-muted">optional</small>
           </div>
 
           <div class="form-group">
             <label for="exampleFormControlTextarea4">demo page NO 2</label>
-            <textarea name="details_2"  id="exampleFormControlTextarea4" rows="10"></textarea>
+            <textarea name="details_2" class="" id="exampleFormControlTextarea4" rows="10"><%= book.demo_page[1] ? book.demo_page[1].trim() : '' %></textarea>
             <small id="emailHelp" class="form-text text-muted">optional</small>
           </div>
 
 
           <div class="form-group">
             <label for="exampleFormControlTextarea5">demo page NO 3</label>
-            <textarea name="details_3"  id="exampleFormControlTextarea5" rows="10"></textarea>
+            <textarea name="details_3" class="" id="exampleFormControlTextarea5" rows="10"><%= book.demo_page[2] ? book.demo_page[2].trim() : '' %>
+            </textarea>
             <small id="emailHelp" class="form-text text-muted">optional</small>
           </div>
 
 
           <div class="form-group">
             <label for="exampleInputEmail2">price</label>
-            <input type="number" name="price"  id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter price">
+            <input value="<%= Number(book.price)  %>" type="number" name="price" class="" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter price">
            <small id="emailHelp" class="form-text text-muted">Rial</small>
           </div>
 
           <div class="form-group">
+          <% if(book.cover.image) {  %>
+          <div>
+            <a download href="<%=server%>/file/<%=book.cover.image.file_name%>">download last image</a>
+          </div>
+          <%   } %>
             <label for="exampleInputEmail12">Cover Image</label>
             <form
             enctype="multipart/form-data"
             id="cover_image"
             >
-            <input type="file" id="cover-image-uploader" name="singleFile" >
+            <input type="file" id="cover-image-uploader" name="singleFile">
             <input type="submit"  class="btn btn-primary" value="Press Here For Upload File">
             </form>
             <small id="emailHelp" class="form-text text-muted">Image Must In 300 * 400</small>
@@ -132,7 +130,7 @@
 
           <div class="form-group">
             <label for="exampleInputEmail3">author</label>
-            <input type="text" name="author" id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="Enter author">
+            <input value="<%=book.author%>" type="text" name="author"  id="exampleInputEmail3" aria-describedby="emailHelp" placeholder="Enter author">
           </div>
 
 
@@ -142,8 +140,8 @@
           <div class="form-group">
             <label for="exampleFormControlSelect1">category</label>
             <select  id="exampleFormControlSelect1" name="category">
-              <option value="ielts">IELTS</option>
-              <option value="tofel">TOFEL</option>
+              <option value="ielts"  <%= book.category == 'ielts' ? 'selected' : '' %> >IELTS</option>
+              <option value="tofel" <%= book.category == 'tofel' ? 'selected' : '' %> >TOFEL</option>
             </select>
           </div>
 
@@ -153,7 +151,11 @@
            enctype="multipart/form-data"
            id="book_uploader"
           >
-          
+          <% if(book.file_url) {  %>
+          <div>
+            <a download href="<%=server%>/file/<%=book.file_url.file_name%>">download last file</a>
+          </div>
+          <%   } %>
             <label for="book_uploaderinput">Upload Book</label>
             <input id="book_uploaderinput" type="file" name="singleFile" class="form-control-file">
             <input type="submit" class="btn btn-primary" value="Press Here For Upload File" />
@@ -162,7 +164,7 @@
 
 
           <div style="padding-top:100px;" class="form-group">
-            <input class="submitt" id="submit_form" type="submit"  value="submit">
+            <input id="submit_form" type="submit"  value="submit">
           </div>
 
       </div>
@@ -229,6 +231,8 @@
     }
 
 
+
+
 // Upload cover Image
     $('#cover_image').submit(async function(e) {
         e.preventDefault();
@@ -237,8 +241,6 @@
 	        alert('please insert file first !');
 	        return false;
         }
-
-        $('#cover_image > input[type="submit"]').attr('value', 'please wait ...');
         
          await uploder($(this), 'coverImage');
     })
@@ -246,14 +248,12 @@
 
 // Upload Book File 
  $('#book_uploader').submit(async function(e) {
-        e.preventDefault();
+     e.preventDefault();
 
         if ($('#book_uploaderinput')[0].files.length == 0) {
 	        alert('please insert file first !');
 	        return false;
         }
-
-        $('#book_uploader > input[type="submit"]').attr('value', 'please wait ...');
         
         await uploder($(this), 'fileContent');
 
@@ -274,21 +274,18 @@
                 contentType: false,
                 success: function(res) {
                   console.log('success');
-
+                  console.log(String(type));
+                  console.log(fileContainer[`${type}`]);
                   if(res.uploadedFile && fileContainer[`${type}`] !== undefined) {
                       fileContainer[`${type}`] = res.uploadedFile._id;
-                      ele.find('input[type="submit"]').attr('value', 'Press Here For Upload File');
-                      alert('your file uploaded successfully');
                       return true;
                   } else {
-                    ele.find('input[type="submit"]').attr('value', 'Press Here For Upload File')
                       alert('your file cant upload, please try again');
                       return false;
                   }
                 },
                 error: function(err) {
                     console.log('error');
-                    ele.find('input[type="submit"]').attr('value', 'Press Here For Upload File')
                     alert('your file cant upload, some errors happen in server');
                     console.log(err.response || err);
                     
@@ -300,10 +297,16 @@
         $('#submit_form').click(function(e) {
             e.preventDefault();
 
-            if(!fileContainer.fileContent) {
-                alert('please upload book file');
-                return false;
+            var book_id = "<%= book._id %>";
+            if(!book_id || book_id == "") {
+                alert('please try again');
+                window.location.href = "<%=server%>/dashboard";
             }
+
+            // if(!fileContainer.fileContent) {
+            //     alert('please upload book file');
+            //     return false;
+            // }
 
            var name = $('input[name="name"]').val();
             if(name == "" || name.length == 0) {
@@ -349,11 +352,18 @@
                 }
             }
 
+            if(fileContainer.fileContent) {
+                data.file_url = fileContainer.fileContent
+            }
+
             
-            axios.post('<%=server%>/v1/books', data)
+            axios.put('<%=server%>/v1/books/<%=book._id%>', data)
             .then(res => {
-                console.log(res)
-                console.log('res')
+                if(res.status == 200 && !res.error) {
+                    console.log('response');
+                    console.log(res);
+                    window.location.href = "<%= server %>/dashboard";
+                }
             })
             .catch(e => {
                 console.log(e.response || e)

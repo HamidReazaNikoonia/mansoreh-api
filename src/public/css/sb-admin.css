@@ -4,6 +4,8 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
 
+@import url('https://fonts.googleapis.com/css?family=Damion|Muli:400,600');
+
 html {
   position: relative;
   min-height: 100%;
@@ -474,3 +476,198 @@ div.dataTables_wrapper div.dataTables_length select {
       min-width: 100px !important;
       margin: 0 12px !important;
 }
+
+
+/*
+   Admin Page - Create /Edit book
+*/
+
+        
+
+        body {
+          font-family: 'Muli', sans-serif;
+          background: url("https://www.toptal.com/designers/subtlepatterns/patterns/geometry2.png");
+        }
+
+
+
+
+        /* necessary to give position: relative to parent. */
+        input, textarea {
+          font: 15px/24px 'Muli', sans-serif;
+          color: #333;
+          background-color: #EBECED;
+          width: 100%;
+          box-sizing: border-box;
+          letter-spacing: 1px;
+          /* height: 50px; */
+          border: 2px solid #EBECED;
+          border-radius: 20px;
+          padding: 15px;
+        }
+
+        textarea {
+          font: 15px/24px 'Muli',sans-serif;
+          color: #333;
+          background-color: #EBECED;
+          width: 100%;
+          box-sizing: border-box;
+          letter-spacing: 1px;
+          min-height: 150px;
+          border: 2px solid #EBECED;
+          border-radius: 20px;
+          padding: 15px;
+        }
+
+        
+
+        input:not['type="submit"']:focus,
+        textarea:focus {
+          outline: none;
+          border: 5px solid #DC2669;
+          transition: 0.5s;
+
+        }
+
+        select:focus {
+          outline: none;
+          border: 5px solid #DC2669;
+          transition: 0.5s;
+
+        }
+
+        .select-wrapper select option {
+          font-weight: normal;
+          background-color: red;
+          border: none;
+          border-radius: 30px;
+          outline: none;
+          display: block;
+          white-space: pre;
+          min-height: 50%;
+          padding: 10px 10px 10px;
+        }
+
+        select {
+          font: 15px/24px 'Muli', sans-serif;
+          color: #333;
+          background-color: #EBECED;
+          width: 100%;
+          box-sizing: border-box;
+          -webkit-appearance: button;
+          appearance: button;
+          outline: none;
+          letter-spacing: 1px;
+          height: 60px;
+          border: 2px solid #EBECED;
+          border-radius: 20px;
+          padding: 15px;
+
+
+        }
+
+        .select-wrapper {
+          position: relative;
+        }
+
+        .select-wrapper::after {
+          content: url('https://img.icons8.com/material-rounded/24/000000/chevron-down.png');
+          position: absolute;
+          font-family: FontAwesome;
+          position: absolute;
+          top: 45px;
+          right: 0;
+          width: 20%;
+          height: 100%;
+          text-align: center;
+          font-size: 28px;
+          line-height: 45px;
+
+          pointer-events: none;
+        }
+
+
+        .upload-btn-wrapper {
+          position: relative;
+          overflow: hidden;
+          display: inline-block;
+        }
+
+        .btn_upload {
+          border: 2px solid gray;
+          color: gray;
+          background-color: white;
+          padding: 8px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+        }
+
+        .submit-wrapper {
+          position: relative;
+
+        }
+
+        .submitt {
+          /* position: absolute; */
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 20px;
+          display: inline-block;
+          font-family: Montserrat;
+          cursor: pointer;
+          text-transform: uppercase;
+          padding: 0.5em 2em;
+          border-radius: 8px;
+          border: 2px solid gray;
+          color: gray;
+          transition: all .6s  cubic-bezier(0.1, 0, 0.1, 1);
+        }
+
+        .submitt::before {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 100%;
+          bottom: 0;
+          background: #DC2669;
+          transition: 0.3s 0.2s cubic-bezier(0.1, 0, 0.1, 1), left 0.3s cubic-bezier(0.1, 0, 0.1, 1);
+          z-index: -1;
+        }
+
+
+
+        .submitt:hover {
+          color: white;
+          transition: all .6s ease-in;
+          background-color: #DC2669;
+          text-decoration: none;
+        }
+
+
+        .bg_1 {
+
+          display: flex;
+          flex-flow: column wrap;
+        }
+
+        small.form-text {
+          font-size: .7rem;
+          margin-left: 1rem;
+          opacity:0.8;
+        }
+
+        #cover-image-uploader,
+        #book_uploaderinput {
+          margin-bottom: 18px;
+        }
