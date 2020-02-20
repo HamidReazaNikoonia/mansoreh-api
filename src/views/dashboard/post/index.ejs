@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+
+    <title><%= appName %></title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="<%=server%>/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="<%=server%>/static/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="<%=server%>/static/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
+
+    <style>
+      .image-responsive {
+          width: 100%;
+          box-shadow: 0px -1px 9px gray;
+          border:2px solid #dee2e68c;
+          max-width: 60px;
+          min-height: 60px;
+          border-radius: 100%;
+          height: auto;
+      }
+    </style>
+
+  </head>
+
+  <body id="page-top">
+
+    <%- include('../layout/header')  %>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <%-   include('../layout/side_bar')  %>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Posts List</li>
+          </ol>
+
+          <!-- Page Content -->
+          <h1>Posts List</h1>
+          <hr>
+          <p></p>
+
+          <div class="card mb-3">
+            <div class="card-header">
+              <div class="d-flex justify-content-between flex-xm-column">
+                <div>
+                    <i class="fas fa-table"></i>
+                    All Posts
+                </div>
+
+                <div>
+                  <a href="<%=server%>/dashboard/post/create">
+                    <i class="fas fa-plus-square"></i>
+                    Create New Post
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Short Details</th>
+                      <th>Author</th>
+                      <th>File</th>
+                      <th>Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Title</th>
+                      <th>Short Details</th>
+                      <th>Author</th>
+                      <th>File</th>
+                      <th>Date</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+
+                    
+                  
+                   
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="card-footer small text-muted">
+              <a href="">refresh data</a>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2020</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="<%=server%>/static/js/jquery.min.js"></script>
+    <script src="<%=server%>/static/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaSript-->
+    <script src="<%=server%>/static/js/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<%=server%>/staticjs/sb-admin.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+    
+     function getApi(url) {
+        axios.get(url)
+          .then(res => { 
+            if(res.data) {
+              
+              let posts_ = res.data.data || [];
+                console.log(posts_)
+              mapContent(posts_);
+            } else {
+              alert('some thing happen, please try again');
+            }
+            })
+          .catch(e => {
+            console.log(e);
+            alert('some thing happen, please try again');
+          })
+     }
+
+     getApi('<%=server%>/v1/posts');
+
+     function mapContent(data) {
+       var content = [];
+       data.map(post => {
+           var template = `<tr>
+                        
+                        <td>${ post.title || '' }</td>
+                        <td>${ post.short_details || ''}</td>
+                        <td>${ post.author || ''}</td>
+                        
+                        <td>
+                          <img class="image-responsive" src="<%=server%>/file/${post.image ? post.image.file_name : ''}" /> 
+                        </td>
+                        <td>${ post.createdAt.toLocaleString() || ''}</td>
+                        <td class="text-center"> 
+                          <a href="<%=server%>/dashboard/post/edit/${post._id}" style="color:gray">
+                            <i class="fa fa-edit "></i>
+                          </a>
+                        </td>
+                        <td class="text-center">
+                          
+                              <input onclick="deleteBook('${post._id}')" class="btn btn-danger" type="submit" style="color:white;opacity: 0.7" value="Delete">
+                          
+                         
+                        </td>
+                      </tr>`;
+                      content.push(template);
+       });
+
+       $('tbody').append(content);
+     }
+
+
+     function deleteBook(id) {
+       var r = confirm("Are you sure ?");
+       if(r) {
+         $.ajax({
+           type:'DELETE',
+           url: '<%=server%>/v1/posts/'+ id,
+           success: function(res) {
+             console.log(res);
+             $('tbody').empty();
+             getApi('<%=server%>/v1/posts');
+           },
+           error: function(err) {
+             console.log('error');
+             console.log(err);
+
+           }
+         })
+       }
+     }
+
+      
+
+                      // $('tbody').append(template)
+    </script>
+
+  </body>
+
+</html>

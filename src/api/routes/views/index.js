@@ -5,6 +5,7 @@ const Services = require('../../domain/service/service.model');
 const Book = require('../../domain/book/book.model');
 const checkForExist = require('../../services/core/checkForExist');
 const ZarinpalCheckout = require('../../services/payment');
+const Post = require('./../../domain/post/post.model');
 
 const router = express.Router();
 
@@ -174,6 +175,41 @@ router.get('/dashboard/book/edit/:id', async (req, res, next) => {
         error: 'book not exist',
       });
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+// dashboard Post
+
+router.get('/dashboard/post', (req, res, next) => {
+  res.render('dashboard/post/index');
+});
+
+router.get('/dashboard/post/edit/:id', async (req, res, next) => {
+  try {
+    const postId = req.params.id || null;
+    if (!postId) {
+      next();
+    } else {
+      const post = await Post.findById(postId).populate('image');
+      if (post) {
+        res.render('dashboard/post/edit', { post });
+      } else {
+        res.json({
+          error: 'post not exist',
+        });
+      }
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/dashboard/post/create', (req, res, next) => {
+  try {
+    res.render('dashboard/post/create');
   } catch (error) {
     next(error);
   }

@@ -670,3 +670,8 @@ div.dataTables_wrapper div.dataTables_length select {
         #book_uploaderinput {
           margin-bottom: 18px;
         }
+
+        .font_default {
+          font-family: 'Muli',
+sans-serif;
+        }

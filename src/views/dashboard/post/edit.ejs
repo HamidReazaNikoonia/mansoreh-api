@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><%=appName%> || Edit Post</title>
+
+
+  <style type="text/css">
+    #upload_ {
+      border-radius: 10px;
+      border:1px solid gray; 
+    }
+
+    #head_image {
+      display: none;
+    }
+
+    #image_submit {
+      opacity: 0.5;
+    }
+  </style>
+
+
+      <!-- Bootstrap core CSS-->
+    <link href="<%=server%>/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="<%=server%>/static/css/fontawesome-free/css/all.min.css" rel="stylesheet">
+
+    <!-- Page level plugin CSS-->
+    <link href="<%=server%>/static/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="<%=server%>/static/css/sb-admin.css" rel="stylesheet">
+
+    <link href="<%=server%>/static/css/jquery-te-1.4.0.css" rel="stylesheet">    
+
+  </head>
+
+  <body class="sidebar-toggled" id="page-top">
+
+    <!-- Header  -->
+    <%- include('../layout/header')  %>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+        <%-   include('../layout/side_bar')  %>
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="<%=server%>/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active ">Edit Post</li>
+          </ol>
+
+          <!-- Page Content -->
+          <h1 class="font_default ml-4 pt-4" style="font-weight:bold">Edit Post</h1>
+
+         
+          
+          <div class="row">
+            <div class="col-12 px-5 pt-5 pb-3 ">
+              <div class="form-group pb-4">
+                <label for="title">Title</label>
+                <input value="<%= post.title %>" type="text" id="title" aria-describedby="emailHelp" placeholder="Enter Title">
+                <small id="emailHelp" class="form-text text-muted">your title must be short</small>
+              </div>
+
+              <div class="form-group pb-4">
+                <label for="description">Description</label>
+                <textarea id="description"  placeholder="Enter description"><%=post.short_details || ''%></textarea>
+                <small id="emailHelp" class="form-text text-muted">optional</small>
+              </div>
+
+              <div class="form-group pb-4">
+                <label for="author">Author</label>
+                <input value="<%=post.author || ''%>" type="text" id="author" placeholder="Enter author">
+                
+              </div>
+
+              <div class="form-group pb-4">
+                <label for="category">Category</label>
+                <select  id="category" aria-describedby="emailHelp" placeholder="Enter author">
+                      <option <%= post.category == 'ielts' ? 'selected' : '' %> value="ielts">IELTS</option>
+                      <option <%= post.category == 'tofel' ? 'selected' : '' %> value="tofel">TOFEL</option>
+                </select>
+              </div>
+
+
+              <div class="form-group pb-4">
+                <label for="post_text">Your Story</label>
+                <textarea style="min-height: 400px"   id="post_text" aria-describedby="emailHelp" placeholder="......"><%=post.body%></textarea>
+              </div>
+
+
+                <form id="upload_"  class="form-group card pb-5 mb-5" method="POST" enctype="multipart/form-data">
+                  
+                  <div class="card-body">
+                    <label class="mr-4 mb-3  d-block">Upload Image </label>
+                  <input type="file" name="singleFile" id="head_image">
+                  <div class="btn btn-primary mb-4" id="input_file_trigger">Pick UP Photo</div>
+                  <input id="image_submit" type="submit" class="btn btn-secondary" value="Send Image">
+                  </div>
+                  <% if(post.image) {    %>
+                        <a class="ml-4" download href="<%=server%>/file/<%=post.image.file_name%>">Download Last Image</a>
+                  <%  } %>
+                </form>
+
+
+                <div class="pt-5 mt-5">
+                  <button class="btn btn-primary w-100" id="submit">Send Post</button>
+                </div>
+                
+
+
+            </div>
+          </div>
+          
+
+        </div>
+        <!-- /.container-fluid -->
+
+        
+
+        <!-- Sticky Footer -->
+        
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+
+
+     <!-- Bootstrap core JavaScript-->
+    <script src="<%=server%>/static/js/jquery.min.js"></script>
+    <script src="<%=server%>/static/js/jquery-te-1.4.0.min.js"></script>
+    <script src="<%=server%>/static/js/bootstrap.bundle.min.js"></script>
+
+
+    <script type="text/javascript">
+
+      window.uploaded_file = null;
+
+      var state_ = {
+            image_upoloded:false
+          }
+
+          // window.$states_ = state_;
+      
+          $('document').ready(function() {
+            $("#post_text").jqte();
+          })
+
+          $('#input_file_trigger').click(function() {
+              // var st = window.$states_;
+              // st.image_upoloded = true;
+              // window.$states_ = st;
+              // $('#head_image').trigger('click');
+              document.getElementById("head_image").click();
+          });
+
+
+
+          
+
+
+          function loading(state) {
+              
+              var btn_ = $('#image_submit');
+
+            if(state) {
+                btn_.attr('value','waiting ...');
+                btn_.css('background-color','blue');
+                return;
+            }
+
+             btn_.attr('value','Send Image');
+                btn_.css('background-color','#6c757d');
+                return;
+
+          }
+
+
+          function loading_submit(state) {
+            var btn_ = $('#submit');
+
+            if(state) {
+              btn_.text("Please Wait ....");
+                btn_.css('background-color','red');
+                return;
+              
+            }
+                btn_.text("Send");
+                btn_.css('background-color','#007bff');
+                return;
+          }
+
+
+          function imageUploadVerification(result) {
+              if(result.length == 0 || result == 'false') {
+                alert('image dosent upload , try agian');
+              } else {
+                alert('your image uploaded');
+              }
+          }
+
+
+
+
+
+
+                  $('#upload_').submit(function(event) {
+                    
+
+                    event.preventDefault();
+                    window.uploaded_file = null;
+                    var formData = new FormData($("#upload_")[0]);
+                    loading(true);
+
+                    $.ajax({
+                        url: '<%=server%>/upload',
+                        type: 'POST',              
+                        data: formData,
+                          processData: false,
+                          contentType: false,
+                          success: function(result)
+                        {
+                            console.log('success');
+                            console.log(result);
+                            if(result.uploadedFile) {
+                              window.uploaded_file = result.uploadedFile._id;
+                              loading(false);
+                            } else {
+                                loading(false);
+                                alert('Some Error happen, please check your network connection');
+                            }
+                        },
+                        error: function(err)
+                        {
+                            loading(false);
+                            alert('Some Error happen, please check your network connection');
+                            console.log(err);
+                            
+                        }
+                    });
+
+                  });
+
+
+          $('#submit').click(function(event) {
+
+            loading_submit(true);
+
+          var obj = {
+                        title: $('#title').val(),
+                        short_details: $('#description').val(),
+                        author:$('#author').val(),
+                        category: $('#category').val(),
+                        body: $('#post_text').val(),
+                      }
+            
+            if(window.uploaded_file) {
+                obj.image = window.uploaded_file;
+            }
+          
+
+          if(obj.title.length == 0 || obj.title == " " || obj.title === null) {
+            alert("Please Enter Title");
+            loading_submit(false);
+            return false;
+          }
+
+          if(obj.body.length == 0 || obj.body == " " || obj.body === null) {
+            alert("Please Enter Text for Post");
+            loading_submit(false);
+            return false;
+          }
+
+
+            $.ajax({
+                        url: '<%=server%>/v1/posts/<%=post._id%>',
+                        type: 'PUT',           
+                        data: obj,
+                        success: function(result)
+                        {
+                             console.log('success');
+                             console.log(result);
+                             loading_submit(false);
+                             alert('your post sended successfully');
+                            //  window.location = "<%=server%>/dashboard/posts";
+                        },
+                        error: function(err)
+                        {
+                            console.log(err);
+                            loading_submit(false);
+                            alert('Some Error happen, please check your network connection');
+                        }
+                    });
+        
+          });
+      
+    </script>
+
+
+
+
+    <!-- Core plugin JavaScript-->
+    <script src="<%=server%>/static/js/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <!-- <script src="{{ asset('js/Chart.min.js') }}"></script> -->
+    <script src="<%=server%>/static/js/jquery.dataTables.min.js"></script>
+    <script src="<%=server%>/static/js/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="<%=server%>/static/js/sb-admin.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="<%=server%>/static/js/datatables-demo.js"></script>
+    <!-- <script src="{{ asset('js/chart-area-demo.js') }}"></script> -->
+
+  </body>
+
+</html>
