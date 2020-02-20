@@ -3,6 +3,7 @@ const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');
 const serviceRoutes = require('./service.routes');
 const bookRoutes = require('./book.routes');
+const postRoutes = require('./post.route');
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
 router.use('/services', serviceRoutes);
 router.use('/books', bookRoutes);
+router.use('/posts', postRoutes);
 
 module.exports = router;
