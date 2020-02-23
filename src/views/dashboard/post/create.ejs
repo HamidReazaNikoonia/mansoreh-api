@@ -159,7 +159,7 @@
 
     <script type="text/javascript">
 
-      window.uploaded_file = "";
+      window.uploaded_file = null;
 
       var state_ = {
             image_upoloded:false
@@ -215,19 +215,7 @@
                 return;
           }
 
-
-          function imageUploadVerification(result) {
-              if(result.length == 0 || result == 'false') {
-                alert('image dosent upload , try agian');
-              } else {
-                alert('your image uploaded');
-              }
-          }
-
-
-
-
-
+          // Submit Form
 
                   $('#upload_').submit(function(event) {
                     
@@ -249,6 +237,7 @@
                             console.log(result);
                             if(result.uploadedFile) {
                               window.uploaded_file = result.uploadedFile._id;
+                              alert('Your Image Uploaded Successfully');
                               loading(false);
                             } else {
                                 loading(false);
@@ -307,7 +296,7 @@
                              console.log(result);
                              loading_submit(false);
                              alert('your post sended successfully');
-                            //  window.location = "<%=server%>/dashboard/posts";
+                            window.location = "<%=server%>/dashboard/post";
                         },
                         error: function(err)
                         {

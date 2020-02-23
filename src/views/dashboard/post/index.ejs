@@ -59,7 +59,7 @@
           </ol>
 
           <!-- Page Content -->
-          <h1>Posts List</h1>
+          <h1 class="font_default ml-4">Posts List</h1>
           <hr>
           <p></p>
 
@@ -87,7 +87,7 @@
                       <th>Title</th>
                       <th>Short Details</th>
                       <th>Author</th>
-                      <th>File</th>
+                      <th>Image</th>
                       <th>Date</th>
                       <th>Edit</th>
                       <th>Delete</th>
@@ -98,7 +98,7 @@
                       <th>Title</th>
                       <th>Short Details</th>
                       <th>Author</th>
-                      <th>File</th>
+                      <th>Image</th>
                       <th>Date</th>
                       <th>Edit</th>
                       <th>Delete</th>
@@ -141,24 +141,7 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="<%=server%>/static/js/jquery.min.js"></script>
@@ -176,17 +159,16 @@
         axios.get(url)
           .then(res => { 
             if(res.data) {
-              
-              let posts_ = res.data.data || [];
-                console.log(posts_)
+              var posts_ = res.data.data || [];
+              console.log(posts_);
               mapContent(posts_);
             } else {
-              alert('some thing happen, please try again');
+              alert('some Error happen, please try again and check your connection');
             }
             })
           .catch(e => {
             console.log(e);
-            alert('some thing happen, please try again');
+            alert('some Error happen, please try again and check your connection');
           })
      }
 

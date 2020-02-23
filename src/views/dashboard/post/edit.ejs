@@ -250,6 +250,7 @@
                             console.log(result);
                             if(result.uploadedFile) {
                               window.uploaded_file = result.uploadedFile._id;
+                              alert('Your Image Uploaded Successfully');
                               loading(false);
                             } else {
                                 loading(false);
@@ -308,7 +309,7 @@
                              console.log(result);
                              loading_submit(false);
                              alert('your post sended successfully');
-                            //  window.location = "<%=server%>/dashboard/posts";
+                            window.location = "<%=server%>/dashboard/post";
                         },
                         error: function(err)
                         {
