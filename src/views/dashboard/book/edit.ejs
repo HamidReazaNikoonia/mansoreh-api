@@ -129,10 +129,18 @@
             enctype="multipart/form-data"
             id="cover_image"
             >
-            <input type="file" id="cover-image-uploader" name="singleFile">
-            <input type="submit"  class="btn btn-primary" value="Press Here For Upload File">
-            </form>
             <small id="emailHelp" class="form-text text-muted">Image Must In 300 * 400</small>
+            <input type="file" id="cover-image-uploader" name="singleFile">
+            
+            <input type="submit"  class="btn btn-primary" value="Press Here For Upload File">
+            
+            <% if(book.cover.image) {  %>
+          <div>
+            <a  download href="<%=server%>/file/<%=book.cover.image.file_name  || ''%>">download last file</a>
+          </div>
+          <%   } %>
+            </form>
+            
             
           </div>
 
@@ -160,6 +168,7 @@
            id="book_uploader"
           >
             <label for="book_uploaderinput">Upload Book</label>
+            <small id="emailHelp" class="form-text text-muted">Image Must In 300 * 400</small>
             <input id="book_uploaderinput" type="file" name="singleFile" class="form-control-file">
             <input type="submit" class="btn btn-primary" value="Press Here For Upload File" />
             <% if(book.file_url) {  %>

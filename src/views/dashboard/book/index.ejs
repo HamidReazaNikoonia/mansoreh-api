@@ -183,6 +183,8 @@
      function mapContent(data) {
        var content = [];
        data.map(book => {
+         let bookDate = new Date (book.createdAt);
+         console.log(bookDate.toLocaleString())
            var template = `<tr>
                         
                         <td>${ book.name || '' }</td>
@@ -192,7 +194,7 @@
                         <td>
                           <a href="<%=server%>/file/${book.file_url ? book.file_url.file_name : ''}" download > Downlod  </a>
                         </td>
-                        <td>${ book.createdAt.toLocaleString() || ''}</td>
+                        <td>${ bookDate.toLocaleString() || '' }</td>
                         <td class="text-center"> 
                           <a href="<%=server%>/dashboard/book/edit/${book._id}" style="color:gray">
                             <i class="fa fa-edit "></i>

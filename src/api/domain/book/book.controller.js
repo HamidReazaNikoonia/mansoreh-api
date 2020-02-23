@@ -7,7 +7,7 @@ const Book = require('./book.model');
 
 exports.get = async (req, res, next) => {
   try {
-    const books = await Book.find().populate('file_url');
+    const books = await Book.find().populate('file_url cover.image');
     res.json({
       books,
     });

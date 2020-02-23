@@ -47,6 +47,18 @@ router.get('/dashboard', async (req, res, next) => {
 });
 
 
+router.get('/dashboard/services', async (req, res, next) => {
+  try {
+    const services = await Services.find();
+    res.render('dashboard/servicesList', {
+      services,
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+
+
 router.get('/dashboard/service/:id', async (req, res, next) => {
   try {
     const data = {

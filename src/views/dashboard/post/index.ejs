@@ -177,6 +177,7 @@
      function mapContent(data) {
        var content = [];
        data.map(post => {
+         let postDate = new Date(post.createdAt);
            var template = `<tr>
                         
                         <td>${ post.title || '' }</td>
@@ -184,9 +185,11 @@
                         <td>${ post.author || ''}</td>
                         
                         <td>
+                        <a href="<%=server%>/file/${post.image ? post.image.file_name : ''}">
                           <img class="image-responsive" src="<%=server%>/file/${post.image ? post.image.file_name : ''}" /> 
+                          </a>
                         </td>
-                        <td>${ post.createdAt.toLocaleString() || ''}</td>
+                        <td>${ postDate.toLocaleString() || ''}</td>
                         <td class="text-center"> 
                           <a href="<%=server%>/dashboard/post/edit/${post._id}" style="color:gray">
                             <i class="fa fa-edit "></i>
