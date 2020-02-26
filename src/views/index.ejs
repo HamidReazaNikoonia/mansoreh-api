@@ -69,11 +69,12 @@
 
             <div class="menu">
         <ul>
-            <a href="#"><li>LINK ONE</li></a>
-            <a href="#"><li>LINK TWO</li></a>
-            <a href="#"><li>LINK THREE</li></a>
-            <a href="#"><li>LINK FOUR</li></a>
-            <a href="#"><li>LINK FIVE</li></a>
+            <a href="#"><li>Home</li></a>
+            <a href="#"><li>Services</li></a>
+            <a href="#"><li>Books</li></a>
+            <a href="#"><li>Blogs</li></a>
+            <a href="#"><li>About Me</li></a>
+            <a href="#"><li>Contact Us</li></a>
         </ul>
 </div> 
             </div>
@@ -82,16 +83,19 @@
 				 <a data-hover href="<%=server%>/" >Home</a>
 				 </div>
 				 <div>
-					 <a data-hover href="{{ route('service_iw') }}" >Services</a>
+					 <a data-hover href="" >Services</a>
 				 </div>
 				 <div>
-					 <a data-hover href="{{ route('books') }}" >Books</a>
+					 <a data-hover href="" >Books</a>
 				 </div>
 				 <div>
-					 <a data-hover href="{{ route('blogs') }}" >Blogs</a>
+					 <a data-hover href="" >Blogs</a>
 				 </div>
 				 <div>
-					 <a data-hover href="{{ route('about-me') }}" >About Me</a>
+					 <a data-hover href="" >About Me</a>
+				 </div>
+                 <div>
+					 <a data-hover href="" >Contact Us</a>
 				 </div>
 				</div>
                 <div class="site-header-inner">
@@ -573,6 +577,9 @@
 	<script>
     new WOW().init();
 
+    // $( ".cross" ).hide();
+    // $( ".menu" ).hide();
+
     $('select').dropdown();
 
 	var canvas = document.querySelector('.js-canvas')
@@ -646,8 +653,7 @@ function lerp(a, b, n) {
 }
 
 
-$( ".cross" ).hide();
-$( ".menu" ).hide();
+
 
 $('.hamburger').click(function(e) {
     $(this).hide();
