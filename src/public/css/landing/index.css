@@ -15,9 +15,9 @@ html {
 }
 
 #menu>div a:hover {
-    opacity: 0.3;
+    opacity: 0.9;
     color: red;
-    transition: all 1s ease-in;
+    transition: all 0.6s ease-in;
 }
 
 body {
@@ -1871,9 +1871,6 @@ right: 30px;
     margin-top: 40px
 }
 
-#menu>div a:hover {
-    color: white
-}
 
 .site-footer::before {
     content: '';
@@ -2399,4 +2396,92 @@ right: 30px;
     .dropdown-overlay {
         display: none !important;
     }
+}
+
+.hamburger {
+  background: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 45px;
+  padding: 5px 15px 0px 15px;
+  color: #999;
+  border: 0;
+  font-size: 1.4em;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  z-index: 10000000000000;
+}
+
+.cross {
+  background: none;
+  position: absolute;
+  user-select: none;
+  -webkit-user-select: none;
+  top: 0px;
+  left: 0;
+  padding: 7px 15px 0px 15px;
+  color: #999;
+  border: 0;
+  font-size: 3em;
+  line-height: 65px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  z-index: 10000000000000;
+}
+
+.menu {
+  z-index: 1000000;
+  font-weight: bold;
+  font-size: 0.8em;
+  width: 100%;
+  top:0;
+  left:0;
+  background: #f1f1f1;
+  position: absolute;
+  text-align: center;
+  font-size: 12px;
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
+}
+
+.menu li {
+  display: block;
+  padding: 15px 0 15px 0;
+  border-bottom: #dddddd 1px solid;
+}
+
+.menu li:hover {
+  display: block;
+  background: #ffffff;
+  padding: 15px 0 15px 0;
+  border-bottom: #dddddd 1px solid;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  margin: 0px;
+  color: #666;
+}
+
+.menu ul li a:hover {
+  color: #666;
+  text-decoration: none;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #666;
+}
+
+.menu a:hover {
+  text-decoration: none;
+  color: #666;
 }

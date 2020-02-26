@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -7,9 +7,9 @@
     <title>ELMA-CENTER || landing page</title>
 	
 	<link href="https://fonts.googleapis.com/css?family=Poppins|Fredoka+One|Acme|Lato:400,700|PT+Sans:700" rel="stylesheet">
-	<link rel="stylesheet" href="static/css/bootstrap.css" >
-	<link rel="stylesheet" type="text/css" href="static/animate.min.css" />
-	<link rel="stylesheet" href="/static/css/landing/index.css">
+	<link rel="stylesheet" href="<%server%>/static/css/bootstrap.css" >
+	
+	<link rel="stylesheet" href="<%server%>/static/css/landing/index.css">
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style>
@@ -63,9 +63,23 @@
 				</svg>
 			</div>
             <div class="container d-flex flex-row justify-content-between">
+            <div class="hamburger-button">
+            <button class="hamburger">&#9776;</button>
+            <button class="cross">&#735;</button>
+
+            <div class="menu">
+        <ul>
+            <a href="#"><li>LINK ONE</li></a>
+            <a href="#"><li>LINK TWO</li></a>
+            <a href="#"><li>LINK THREE</li></a>
+            <a href="#"><li>LINK FOUR</li></a>
+            <a href="#"><li>LINK FIVE</li></a>
+        </ul>
+</div> 
+            </div>
 				<div id="menu" class="d-flex flex-row justify-content-around w-50">
 				 <div>
-				 <a data-hover href="{{ route('home') }}" >Home</a>
+				 <a data-hover href="<%=server%>/" >Home</a>
 				 </div>
 				 <div>
 					 <a data-hover href="{{ route('service_iw') }}" >Services</a>
@@ -116,7 +130,7 @@
 						<div class="hero-copy">
 	                        <h1 class="hero-title mt-0 is-revealing"><span .feature-extended-image>ELMA</span > center</h1>
 	                        <p class="hero-paragraph is-revealing pt-32 pb-16">
-	                        	{{ $data->sub_title }}
+	                        	<%= content.header_title %>
 	                        </p>
 	                        <p data-hover class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="#">Your Services</a></p>
 						</div>
@@ -227,8 +241,12 @@
                             data-wow-delay="0.4s"
                             style="animation-duration: 2.8s"
                              class="shake feature-extended-body wow bounceInLeft">
-                                <h3 data-hover class="mt-0 mb-4">{{ $data->text_1_title }}</h3>
-                                <p>{{ $data->text_1_content }}</p>
+                                <h3 data-hover class="mt-0 mb-4">
+                                   <%= content.features.title_1 %>
+                                </h3>
+                                <p>
+                                <%= content.features.content_1 %>
+                                </p>
                             </div>
                         </div>
                         <div class="feature-extended my-5 py-5 ">
@@ -242,8 +260,12 @@
                             data-wow-delay="0.3s"
                             style="animation-duration: 2.8s"
                              class=" shake feature-extended-body wow bounceInLeft">
-								<h3 data-hover class=" mt-0 mb-4">{{ $data->text_2_title }}</h3>
-	                            <p>{{ $data->text_2_content }}</p>
+								<h3 data-hover class=" mt-0 mb-4">
+                                <%= content.features.title_2 %>
+                                </h3>
+	                            <p>
+                                <%= content.features.content_2 %>
+                                </p>
                              </div>
                         </div>
                         <div class="feature-extended my-5 py-5">
@@ -259,8 +281,12 @@
                             data-wow-delay="0.3s"
                             style="animation-duration: 2.8s"
                              class="shake feature-extended-body wow bounceInRight">
-							<h3 data-hover class="mt-0 mb-4">{{ $data->text_3_title }}</h3>
-                                <p>{{ $data->text_3_content }}</p>
+							<h3 data-hover class="mt-0 mb-4">
+                            <%= content.features.title_3 %>
+                            </h3>
+                                <p>
+                                <%= content.features.content_3 %>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -334,11 +360,12 @@
                                             <div class="icon-ctn-nyn05">
 											<img data-hover style="max-width:79%" class="fadeInRight wow animated" src="{{ asset('img/calendar-colour-800px.png') }}" alt="" data-wow-delay="0.25s" style="visibility: visible; animation-delay: 0.25s; animation-name: fadeInRight;">                                             </div>
                                             <div class="shotr-ttl-nyn05">
-                                                <h3 data-hover class="heading-nyn05">Order your Request</h3>
+                                                <h3 data-hover class="heading-nyn05">
+                                                <%= content.steps.step_1_title%>
+                                                </h3>
                                             </div>
                                             <div class="more-nyn05">
-                                                <strong class="vh-nyn05">Order your request at any time</strong>
-                                                <span>you should upload signup and upload your file and pay </span>
+                                               <%= content.steps.step_1_content %>
                                             </div>
                                         </div>
                                     </div>
@@ -352,11 +379,12 @@
 											<img data-hover style="max-width:76%" class="fadeInRight wow animated" src="{{ asset('img/drawkit-list-app-colour-400px.png') }}" alt="" data-wow-delay="0.95s" style="visibility: visible; animation-delay: 0.75s; animation-name: fadeInRight;">                                             </div>
                                             <div class="shotr-ttl-nyn05">
                                                 <h3
-                                                data-hover class="heading-nyn05">Translate Your Document</h3>
+                                                data-hover class="heading-nyn05">
+                                                <%= content.steps.step_2_title%>
+                                                </h3>
                                             </div>
                                             <div class="more-nyn05">
-                                                <strong class="vh-nyn05">We are translate your document in best way with high quality</strong>
-                                                <span>this process till about 4 days</span>
+                                                <%= content.steps.step_2_content%>
                                             </div>
                                         </div>
                                     </div>
@@ -369,11 +397,12 @@
                                             <div class="icon-ctn-nyn05">
 											<img data-hover style="max-width:60%" class="fadeInRight wow animated" src="{{ asset('svg/student-colour.svg') }}" alt="" data-wow-delay="1.25s" style="visibility: visible; animation-delay: 1.6s; animation-name: fadeInRight;">                                             </div>
                                             <div class="shotr-ttl-nyn05">
-                                                <h3 data-hover class="heading-nyn05">Your Request is ready 😍</h3>
+                                                <h3 data-hover class="heading-nyn05">
+                                                <%= content.steps.step_3_title%>
+                                                </h3>
                                             </div>
                                             <div class="more-nyn05">
-                                                <strong class="vh-nyn05">After that you can get your translated document</strong>
-                                                <span>you must to go in your panel and download your result</span>
+                                                <%= content.steps.step_3_content%>
                                             </div>
                                         </div>
                                     </div>
@@ -543,24 +572,26 @@
 
 	<script>
     new WOW().init();
+
     $('select').dropdown();
 
-	const canvas = document.querySelector('.js-canvas')
-const ctx = canvas.getContext('2d')
+	var canvas = document.querySelector('.js-canvas')
+    var ctx = canvas.getContext('2d')
 
-let width = canvas.width = window.innerWidth
-let height = canvas.height = window.innerHeight * 5
+var width = canvas.width = window.innerWidth
+var height = canvas.height = window.innerHeight * 5
 
-let mouseX = width / 2;
-let mouseY = height / 2;
+var mouseX = width / 2;
+var mouseY = height / 2;
 
-let circle = {
+var circle = {
   radius: 10,
   lastX: mouseX,
   lastY: mouseY
 }
 
-const elems = [...document.querySelectorAll('[data-hover]')]
+const elems = [...document.querySelectorAll('[data-hover]')];
+
 
 function onResize () {
   width = canvas.width = window.innerWidth
@@ -589,7 +620,10 @@ function init () {
     mouseY = e.pageY;
   })
 
+  
   window.addEventListener('resize', onResize, false)
+
+
   
   let tween = TweenMax.to(circle, 0.25, {
     radius: circle.radius * 3,
@@ -610,6 +644,39 @@ function init () {
 function lerp(a, b, n) {
   return (1 - n) * a + n * b
 }
+
+
+$( ".cross" ).hide();
+$( ".menu" ).hide();
+
+$('.hamburger').click(function(e) {
+    $(this).hide();
+    $('.cross').show();
+    $( ".menu" ).slideToggle('slow');
+})
+
+$('.cross').click(function(e) {
+    $(this).hide();
+    $('.hamburger').show();
+    $( ".menu" ).slideToggle('slow');
+})
+
+
+  function onResizeForHamburgerMenu() {
+      var widthScreen = window.innerWidth;
+      console.log(widthScreen);
+      if(widthScreen < 700) {
+          $( ".hamburger" ).show();
+          $('#menu > *').hide();
+      } else {
+          $( ".hamburger" ).hide();
+          $( ".menu" ).hide();
+          $( ".cross" ).hide();
+          $('#menu > *').show();
+      }
+  }
+    onResizeForHamburgerMenu();
+    window.addEventListener('resize', onResizeForHamburgerMenu, false)
 
 // init()
 	</script>

@@ -4,9 +4,13 @@ const { port, env } = require('./config/vars');
 const logger = require('./config/logger');
 const app = require('./config/express');
 const mongoose = require('./config/mongoose');
+const cmsController = require('./api/domain/cms/cms.controller');
 
 // open mongoose connection
 mongoose.connect();
+
+// initial CMS database document
+cmsController.init();
 
 // listen to requests
 app.listen(port, () => logger.info(`server started on port ${port} (${env})`));

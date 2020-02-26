@@ -4,14 +4,21 @@ const Upload = require('../../domain/upload/upload.model');
 const Services = require('../../domain/service/service.model');
 const Book = require('../../domain/book/book.model');
 const checkForExist = require('../../services/core/checkForExist');
-const ZarinpalCheckout = require('../../services/payment');
+// const ZarinpalCheckout = require('../../services/payment');
+const cmsController = require('./../../domain/cms/cms.controller');
 const Post = require('./../../domain/post/post.model');
 
 const router = express.Router();
 
 
-router.get('/', (req, res, next) => {
-  res.render('index');
+// Static Page
+
+router.get('/', async (req, res, next) => {
+  const content = await cmsController.getLandingPageContent();
+
+  res.render('index', {
+    content,
+  });
 });
 
 // Services Pages
@@ -259,5 +266,6 @@ router.post('/upload', uploder.single('singleFile'), async (req, res, next) => {
     });
   }
 });
+
 
 module.exports = router;
