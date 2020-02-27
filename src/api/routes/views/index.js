@@ -23,6 +23,10 @@ router.get('/', async (req, res, next) => {
 
 // Services Pages
 
+router.get('/services', (req, res, next) => {
+  res.render('services');
+});
+
 router.get('/service/i/w', (req, res, next) => {
   res.render('services/ielts_writing');
 });

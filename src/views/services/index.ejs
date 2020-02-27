@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="<%server%>/static/css/bootstrap.css" >
+        <link href="https://fonts.googleapis.com/css?family=Poppins|Fredoka+One|Acme|Lato:400,700|PT+Sans:700" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+
+body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background: #ECEFFC;
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+}
+.carousel .slides {
+  position: relative;
+  top: -4em;
+  left: 10em;
+}
+.carousel .slides img {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  opacity: 0;
+  z-index: 9999;
+}
+.carousel .slides img.active {
+  opacity: 1;
+}
+.carousel .overlays {
+  position: relative;
+  width: 36em;
+  height: 18em;
+}
+.carousel .overlays .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bar-color);
+  transform-origin: left;
+}
+.carousel .nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0 0 0 6em;
+  list-style-type: none;
+}
+.carousel .nav-links .nav-link {
+  font-size: 2rem;
+  font-family: Acme, serif;
+  line-height: 2;
+  text-decoration: none;
+  color: #7f8c8d;
+  transition: 0.3s;
+}
+.carousel .nav-links .nav-link:hover {
+  color: #1c1e1f;
+}
+.carousel .nav-links .nav-link.active {
+  color: black;
+  pointer-events: none;
+}
+
+        </style>
+    </head>
+    <body>
+    <div class="carousel">
+  <div class="slides">
+    <img
+      src="<%=server%>/static/svg/bg_speaking.svg"
+      alt="Stainless Steel"
+    />
+    <img
+      src="<%server%>/static/svg/undraw_typewriter_i8xd.svg"
+      alt="Army Green"
+    />
+    <img
+      src="<%=server%>/static/svg/bg_speaking.svg"
+      alt="Cranberry"
+    />
+    <img
+      src="<%server%>/static/svg/undraw_typewriter_i8xd.svg"
+      alt="Midnight Blue"
+    />
+  </div>
+  <div class="overlays">
+    <div class="bar" style="--bar-color: #388a55"></div>
+    <div class="bar" style="--bar-color: #677de1"></div>
+    <div class="bar" style="--bar-color: #dd6b7b"></div>
+    <div class="bar" style="--bar-color: #f5ed16"></div>
+  </div>
+  <ul class="nav-links">
+  <span>Chooise your Servies</span>
+    <li><a onclick="setState('is')" href="#" class="nav-link">IELTS SPEAKING</a></li>
+    <li><a onclick="setState('iw')" href="#" class="nav-link">IELTS WRITING</a></li>
+    <li><a onclick="setState('ts')" href="#" class="nav-link">TOFEL SPEAKING</a></li>
+    <li><a onclick="setState('tw')" href="#" class="nav-link">TOFEL WRITING</a></li>
+  </ul>
+
+  
+</div>
+<button onclick="navigateToService()" class="btn btn-primary ml-5">click here for navigate ...</button>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <script>
+
+  var _state = 'is'
+
+  function setState(state) {
+     _state = state;
+  }
+
+  function navigateToService() {
+      switch(_state) {
+          case 'is': 
+            window.location.href = '<%=server%>/service/i/s';
+            break;
+          case 'iw':
+            window.location.href = '<%=server%>/service/i/w';
+            break;
+          case 'ts':
+            window.location.href = '<%=server%>/service/t/s';
+            break;
+          case 'tw':
+            window.location.href = '<%=server%>/service/t/w';
+            break;
+      }
+  }
+      
+var navLinks = document.querySelectorAll(".carousel .nav-link");
+var slides = document.querySelectorAll(".carousel .slides img");
+var overlays = document.querySelectorAll(".carousel .bar");
+var maxZIndex = navLinks.length;
+var easeInOutQuart = "cubic-bezier(0.77, 0, 0.175, 1)";
+slides[0].classList.add("active");
+navLinks[0].classList.add("active");
+navLinks.forEach(function (navLink, activeIndex) {
+  overlays[activeIndex].style.zIndex = "" + (navLinks.length -
+  activeIndex);
+  navLink.addEventListener("click", function () {
+    // nav-link
+    navLinks.forEach(function (navLink) {return navLink.classList.remove("active");});
+    navLink.classList.add("active");
+    // slide
+    var currentSlide = document.querySelector(".carousel .slides img.active");
+    var slideFadeOut = currentSlide.animate([
+    { transform: "translateX(0)", opacity: 1 },
+    { transform: "translateX(5%)", opacity: 0 }],
+    {
+      duration: 600,
+      easing: "ease-in",
+      fill: "forwards" });
+
+    slideFadeOut.onfinish = function () {
+      slides.forEach(function (slide) {return slide.classList.remove("active");});
+      var activeSlide = slides[activeIndex];
+      activeSlide.classList.add("active");
+      activeSlide.animate([
+      {
+        transform: "translateX(-5%)",
+        opacity: 0 },
+
+      {
+        transform: "translateX(0)",
+        opacity: 1 }],
+
+      { duration: 600, easing: "ease-out", fill: "forwards" });
+    };
+    // overlay
+    maxZIndex += 1;
+    var activeOverlay = overlays[activeIndex];
+    activeOverlay.style.zIndex = "" + maxZIndex;
+    activeOverlay.animate([{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], { duration: 1200, fill: "forwards", easing: easeInOutQuart });
+  });
+});
+  </script>
+
+    </body>
+</html>
