@@ -21,6 +21,19 @@ router.get('/', async (req, res, next) => {
   });
 });
 
+
+// Book Pages
+
+router.get('/books', (req, res, next) => {
+  res.render('book');
+});
+
+// Blogs Pages
+
+router.get('/blog', (req, res, next) => {
+  res.render('blog');
+});
+
 // Services Pages
 
 router.get('/services', (req, res, next) => {

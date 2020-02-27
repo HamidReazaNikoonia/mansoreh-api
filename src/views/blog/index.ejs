@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title><%=appName%> || Blogs</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+       Blogs
+
+       <div class="container_post">
+           
+       </div>
+    </body>
+
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  <script>
+  var posts = [];
+      function getPosts() {
+         $.ajax({
+             type:'GET',
+             url: '<%=server%>/v1/posts',
+             success: function(res) {
+                 if(res.data) {
+                     posts = res.data;
+                     generateView();
+                 }
+             },
+             error: function(err) {
+                 console.log(err);
+             }
+         })
+      }
+
+
+      function generateView() {
+          var posts_html = [];
+          posts.forEach(function(item) {
+              var template = `<div>
+                <h1>${item.title}</h1>
+          </div>`;
+             posts_html.push(template);
+          });
+
+          $('.container_post').append(posts_html);
+      }
+
+      $(document).ready(function() {
+          getPosts();
+      });
+  </script>
+</html>
