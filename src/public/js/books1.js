@@ -1,9 +1,9 @@
 var Books = (function() {
 
-	var $books = $( '#bk-list > li > div.bk-book' ), booksCount = $books.length;
+	
 	
 	function init() {
-
+      		var $books = $( '#bk-list > li > div.bk-book' ), booksCount = $books.length;
 		$books.each( function() {
 			
 			var $book = $( this ),

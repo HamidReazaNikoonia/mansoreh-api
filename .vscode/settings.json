@@ -2,5 +2,7 @@
   "standard.enable": false,
   "cSpell.words": [
     "tofel"
-  ]
+  ],
+  "markdown.extension.toc.updateOnSave": false,
+  "markdown-preview-enhanced.liveUpdate": false
 }

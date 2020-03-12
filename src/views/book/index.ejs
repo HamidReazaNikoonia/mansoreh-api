@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-		<title>English Books</title>
+		<title><%=appName%> || Books</title>
 		<meta name="description" content="3D Book Showcase with CSS 3D Transforms" />
 		<meta name="keywords" content="3d transforms, css3 3d, book, jquery, open book, css transitions" />
 		<meta name="author" content="Codrops" />
@@ -44,7 +44,7 @@ body.sticky-header #header h1 {
   transition: all 0.5s ease;
 }
 #header h1 {
-  font-size: 42px;
+  font-size: 90px;
   color: #fff;
   line-height: 230px;
   text-transform: uppercase;
@@ -54,6 +54,26 @@ body.sticky-header #header h1 {
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
+
+@media only screen and (max-width:1100px) {
+	#header h1 {
+		font-size: 70px;
+	}
+}
+
+@media only screen and (max-width:850) {
+	#header h1 {
+		font-size: 45px;
+	}
+}
+
+@media only screen and (max-width:630px) {
+	#header h1 {
+		font-size: 30px;
+	}
+}
+
+
 #header nav {
   position: absolute;
   bottom: 0;
@@ -65,6 +85,7 @@ body.sticky-header #header h1 {
 #header nav a {
   color: #fff;
   display: inline-block;
+	margin-right:12px;
   padding: 10px 15px;
   line-height: 1;
   text-decoration: none;
@@ -120,30 +141,43 @@ body {
   transition: padding-top 0.5s ease;
 }
 
+#clearfix {
+	padding-bottom: 9rem;
+}
+
+   .app_name {
+		 font-weight:bolder;
+		 color: #08122f;
+	 }
+
+.active {
+	color: #12299c !important;
+	 -webkit-box-shadow: 0 0 0 1px #fff;
+    box-shadow: 0 0 0 1px #fff;
+}
 		</style>
 	</head>
 	<body>
 		<header id="header">
-    <h1>Mansoreh Books</h1>
-    <nav>
-      <a href="">IELTES</a>
-      <a href="">TOFEL</a>
-      <a href="">SPEAKING</a>
-      <a href="">WRITING</a>
+    <h1>"<span class="app_name">  <%= appName%></span>  Books "</h1>
+    <nav id="category">
+			<a class="active" href="#">ALL</a>
+      <a href="#">IELTES</a>
+      <a href="#">TOFEL</a>
     </nav>
   </header>
 		<div class="container" style="padding-top:100px">	
 			
-			<header class="clearfix">
-				<h1>Mansoreh English Books</h1>
-				<span class="support-note">best english books in world</span>
+			<header id="clearfix" class="clearfix">
+				<h1><span class="app_name">  <%= appName%></span> English Books and Documents</h1>
+				<span class="support-note">best english books and docuemtns in the world</span>
 			</header>
+
 			<div class="main">
 				<ul id="bk-list" class="bk-list clearfix">
 					
 
-					@foreach($books as $book)
-
+<!--
 					<li>
 						<div class="bk-book book-1 bk-bookdefault">
 							<div class="bk-front">
@@ -211,104 +245,16 @@ body {
 						</div>
 					</li>
 
+					-->
 
-					@endforeach
 
-					<li>
-						<div class="bk-book book-2 bk-bookdefault">
-							<div class="bk-front">
-								<div class="bk-cover-back"></div>
-								<div class="bk-cover">
-									
-								</div>
-							</div>
-							<div class="bk-page">
-								<div class="bk-content">
-									<p>Whale catfish leatherjacket deep sea anglerfish grenadier sawfish pompano dolphinfish carp large-eye bream, squeaker amago. Sandroller; rough scad, tiger shovelnose catfish snubnose parasitic eel? Black bass soldierfish duckbill--Rattail Atlantic saury Blind shark California halibut; false trevally warty angler!</p>
-								</div>
-								<div class="bk-content">
-									<p>Trahira giant wels cutlassfish snapper koi blackchin mummichog mustard eel rock bass whiff murray cod. Bigmouth buffalo ling cod giant wels, sauger pink salmon. Clingfish luderick treefish flatfish Cherubfish oldwife Indian mul gizzard shad hagfish zebra danio. Butterfly ray lizardfish ponyfish muskellunge Long-finned sand diver mullet swordfish limia ghost carp filefish.</p>
-								</div>
-								<div class="bk-content bk-content-current">
-									<p>Red snapper Kafue pike fangtooth humums's slipmouth, salmon cutlassfish; swallower European perch mola mola sunfish, threadfin bream. Billfish hog sucker trout-perch lenok orbicular velvetfish. Delta smelt striped bass, medusafish dragon goby starry flounder cuchia round whitefish northern anchovy spadefish merluccid hake cat shark Black pickerel. Pacific cod.</p>
-								</div>
-							</div>
-							<div class="bk-back">
-								<p>Tyrant, blackmailer, racketeer, murderer - his influence reaches every level of American society. Meet Cat Corleone, a friendly cat, a just cat, a reasonable cat. The deadliest lord of the Cata Nostra. The Catfather.</p>
-							</div>
-							<div class="bk-right"></div>
-							<div class="bk-left">
-								<h2>
-									<span>The Catfather</span>
-									<span>by Mario Purrzo</span>
-								</h2>
-							</div>
-							<div class="bk-top"></div>
-							<div class="bk-bottom"></div>
-						</div>
-						<div class="bk-info">
-							<button class="bk-bookback">Flip</button>
-							<button class="bk-bookview">View inside</button>
-							<h3>
-								<span>Mario Purrzo</span>
-								<span>The Catfather</span>
-							</h3>
-							<p>A modern masterpiece,The Godfather is a searing portrayal of the 1940s criminal underworld. It is also the intimate story of the Corleone family, at once drawn together and ripped apart by its unique position at the core of the American Mafia. </p>
-						</div>
-					</li>
-					<li>
-						<div class="bk-book book-3 bk-bookdefault">
-							<div class="bk-front">
-								<div class="bk-cover-back"></div>
-								<div class="bk-cover">
-								</div>
-							</div>
-							<div class="bk-page">
-								<div class="bk-content bk-content-current">
-									<p>Oceanic flyingfish spotted danio fingerfish leaffish, Billfish halibut Atlantic cod threadsail poacher slender mola. Swallower muskellunge, turbot needlefish yellow perch trout dhufish dwarf gourami false moray southern smelt cod dwarf gourami. Betta blue catfish bottlenose electric ray sablefish.</p>
-								</div>
-								<div class="bk-content">
-									<p>Whale catfish leatherjacket deep sea anglerfish grenadier sawfish pompano dolphinfish carp large-eye bream, squeaker amago. Sandroller; rough scad, tiger shovelnose catfish snubnose parasitic eel? Black bass soldierfish duckbill--Rattail Atlantic saury Blind shark California halibut; false trevally warty angler!</p>
-								</div>
-								<div class="bk-content">
-									<p>Trahira giant wels cutlassfish snapper koi blackchin mummichog mustard eel rock bass whiff murray cod. Bigmouth buffalo ling cod giant wels, sauger pink salmon. Clingfish luderick treefish flatfish Cherubfish oldwife Indian mul gizzard shad hagfish zebra danio. Butterfly ray lizardfish ponyfish muskellunge Long-finned sand diver mullet swordfish limia ghost carp filefish.</p>
-								</div>
-							</div>
-							<div class="bk-back">
-								<img src="images/3.png" alt="cat"/>
-								<p>Holden Catfield is a seventeen-year-old dropout who has just been kicked out of his fourth school. Navigating his way through the challenges of growing up, Holden dissects the 'phony' aspects of society.</p>
-							</div>
-							<div class="bk-right"></div>
-							<div class="bk-left">
-								<h2>
-									<span>J.C. Salinger</span>
-									<span>The Catcher in the Rye</span>
-								</h2>
-							</div>
-							<div class="bk-top"></div>
-							<div class="bk-bottom"></div>
-						</div>
-						<div class="bk-info">
-							<button class="bk-bookback">Flip</button>
-							<button class="bk-bookview">View inside</button>
-							<h3>
-								<span>J.C. Salinger</span>
-								<span>The Catcher in the Rye</span>
-							</h3>
-							<p>Originally published for adults, this novel has since become popular with adolescent readers for its themes of cat confusion, angst, alienation, and rebellion.</p>
-						</div>
-					</li>
 				</ul>
 			</div>
 		</div><!-- /container -->
 		<script src="<%=server%>/static/js/jquery.min.js"></script>
 		<script src="<%=server%>/static/js/books1.js"></script>
 		<script>
-			$(function() {
-
-				Books.init();
-
-			});
+		
 
 			$(function(){
   $(window).scroll(function(){
@@ -322,7 +268,37 @@ body {
 });//ready func.
 
 
-     var books = [];
+
+$("#category a").click(function(e) {
+  e.preventDefault();
+	var categoryContent = $(this).text();
+	filterBooks(categoryContent);
+	$('#category a').removeClass('active');
+	$(this).addClass('active');
+})
+
+var books = [];
+
+function filterBooks(category) {
+	switch(category) {
+		case 'TOFEL':
+			$('li[data-category]').css({display: 'none'});
+			$('li[data-category="tofel"]').css({display: 'list-item'})
+			break;
+    case 'IELTES':
+			$('li[data-category]').css({display: 'none'});
+			$('li[data-category="ielts"]').css({display: 'list-item'});
+			break;
+		case 'ALL':
+    	$('li[data-category]').css({display: 'list-item'});
+			break;
+		default:
+			$('li[data-category]').css({display: 'list-item'});
+    	break;
+	}
+}
+
+     
       function getBooks() {
          $.ajax({
              type:'GET',
@@ -346,17 +322,75 @@ body {
       function generateView() {
           var books_html = [];
           books.forEach(function(item) {
-              var template = `<div>
-                <h1>${item.title}</h1>
-          </div>`;
+              var template = `<li data-category="${item.category}">
+						<div class="bk-book book-1 bk-bookdefault">
+							<div class="bk-front">
+								<div class="bk-cover-back"></div>
+								<div class="bk-cover">
+								${ item.cover.image ? `<img src="<%=server%>/file/${item.cover.image.file_name}" />` : '' }
+								</div>
+							</div>
+
+							<div class="bk-page">
+								
+								${ item.demo_page[0] ? `<div class="bk-content bk-content-current"><p>${item.demo_page[0] }</p></div>` : '' }
+								${ item.demo_page[1] ? `<div class="bk-content "><p>${item.demo_page[1] }</p></div>` : '' }
+								${ item.demo_page[2] ? `<div class="bk-content "><p>${item.demo_page[2] }</p></div>` : '' }
+							</div>
+
+							<div class="bk-back">
+								<p>${item.details !== "" ? item.details : item.short_details}</p>
+							</div>
+
+
+							<div class="bk-right"></div>
+
+
+							<div class="bk-left">
+								<h2>
+									<span>${ item.name }</span>
+									<span>${ item.author }</span>
+								</h2>
+							</div>
+
+
+							<div class="bk-top"></div>
+							<div class="bk-bottom"></div>
+
+						</div>
+
+						<div class="bk-info">
+							<button class="bk-bookback">Flip</button>
+							<button class="bk-bookview">View inside</button>
+							<button class="bk-download">
+							  <a download href="<%=server%>/file/${item.file_url.file_name}" >
+								download
+								</a>
+							</button>
+							<h3>
+								<span>${ item.author }</span>
+								<span>
+									<a download href="<%=server%>/file/${item.file_url.file_name}" >
+										${ item.name }
+									</a>
+								</span>
+							</h3>
+							<p>${item.short_details}</p>
+						</div>
+					</li>`;
              books_html.push(template);
           });
 
-          $('.container_post').append(books_html);
+					$('.bk-list').empty();
+          $('.bk-list').append(books_html);
+					setTimeout(function() {
+						Books.init();
+					}, 100);
       }
 
-      $(document).ready(function() {
-          getBooks();
+      $(document).ready(async function() {
+          await getBooks();
+					
       })
 		</script>
 	</body>

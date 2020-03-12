@@ -225,6 +225,24 @@
 	width: 1px;
 }
 
+
+.bk-download {
+	min-width: 100%;
+	margin-top:15px;
+}
+
+.bk-download:hover {
+	opacity:0.6;
+}
+
+.bk-download a {
+	color: white !important;
+	display: block;
+	width:110%;
+	margin-left: -11px;
+	
+}
+
 .bk-list li .bk-cover:after,
 .bk-list li .bk-back:after {
 	content: '';
@@ -318,10 +336,10 @@
 	background-color: #ff924a;
 }
 
-.book-1 .bk-cover {
-	background-image: url(../images/1.png);	
-	background-repeat: no-repeat;
-	background-position: 10px 40px;
+.bk-cover > img {
+	/* width:100%; */
+	height: auto;
+	max-width: 300px;
 }
 
 .book-1 .bk-cover h2 {
