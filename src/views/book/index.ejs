@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<title><%=appName%> || Books</title>
+		<link href="https://fonts.googleapis.com/css?family=Baloo+2:700&display=swap" rel="stylesheet">
 		<meta name="description" content="3D Book Showcase with CSS 3D Transforms" />
 		<meta name="keywords" content="3d transforms, css3 3d, book, jquery, open book, css transitions" />
 		<meta name="author" content="Codrops" />
@@ -30,7 +31,7 @@ body.sticky-header #header h1 {
 
 #header {
   width: 100%;
-  height: 300px;
+  height: 100vh;
   background-color: #3498db;
   text-align: center;
   position: relative;
@@ -44,15 +45,19 @@ body.sticky-header #header h1 {
   transition: all 0.5s ease;
 }
 #header h1 {
-  font-size: 90px;
-  color: #fff;
-  line-height: 230px;
+  font-size: 99px;
+  color: rgba(11, 10, 46, 0.7);
+  text-shadow: 1px 0 7px #b5b4b4;
+  line-height: 2;
   text-transform: uppercase;
-  font-weight: 100;
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
+	max-width: 80vw;
+  margin-top: 20vh;
+	background-color: rgba(0,0,0,0.2);
+	font-family: 'Baloo 2', cursive;
 }
 
 @media only screen and (max-width:1100px) {
@@ -61,15 +66,19 @@ body.sticky-header #header h1 {
 	}
 }
 
-@media only screen and (max-width:850) {
+@media only screen and (max-width:850px) {
 	#header h1 {
-		font-size: 45px;
+		font-size: 55px;
+		max-width: 60vw;
+    margin-top: 27vh;
 	}
 }
 
 @media only screen and (max-width:630px) {
 	#header h1 {
-		font-size: 30px;
+		font-size: 40px;
+		text-align:left;
+		padding-left:6vw
 	}
 }
 
@@ -80,7 +89,7 @@ body.sticky-header #header h1 {
   height: 60px;
   line-height: 60px;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(19, 21, 90, 0.9);
 }
 #header nav a {
   color: #fff;
@@ -151,7 +160,7 @@ body {
 	 }
 
 .active {
-	color: #12299c !important;
+	color: #82ec0e !important;
 	 -webkit-box-shadow: 0 0 0 1px #fff;
     box-shadow: 0 0 0 1px #fff;
 }
@@ -159,7 +168,7 @@ body {
 	</head>
 	<body>
 		<header id="header">
-    <h1>"<span class="app_name">  <%= appName%></span>  Books "</h1>
+    <h1><span class="app_name">  <%= appName%></span> Documents </h1>
     <nav id="category">
 			<a class="active" href="#">ALL</a>
       <a href="#">IELTES</a>

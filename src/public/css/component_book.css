@@ -557,3 +557,17 @@
 .no-js .bk-info button {
 	display: none;
 }
+
+
+#header {
+	background-image: url('./../img/undraw_Bibliophile_hwqc.svg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+@media only screen and (max-width:1000px) {
+  #header {
+    background-size: contain;
+  }
+}
