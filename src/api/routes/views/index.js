@@ -22,6 +22,14 @@ router.get('/', async (req, res, next) => {
 });
 
 
+// About Us
+
+
+router.get('/about-us', (req, res, next) => {
+  res.render('static/about_us');
+});
+
+
 // Book Pages
 
 router.get('/books', (req, res, next) => {
