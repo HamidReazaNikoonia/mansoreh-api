@@ -27,6 +27,56 @@
 .checked {
     color: orange
 }
+
+#menu {
+    position: relative;
+}
+
+.service-menu-container {   
+    display:none; 
+    position: absolute;
+    width:160px;
+    border-radius: 6%;
+    border: 1px solid rgba(199, 199, 199, 0.39);
+    box-shadow: 1px 0 3px rgba(199, 199, 199, 0.534);
+    top:30px;
+    background-color: rgba(255, 254, 254, 0.904);
+    left:20%;
+    transition:all 1s ease;
+
+}
+
+.service-menu-container ul {
+    list-style: none;
+    margin: 0;
+    padding:0;
+}
+
+.service-menu-container li {
+    border-bottom: 1px solid rgb(189, 189, 189);
+    cursor: pointer;
+    padding: 5px 0;
+    padding-left:10%;
+    
+}
+
+.service-menu-container li:hover {
+    opacity: 0.6;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(199, 193, 193, 0.589);
+}
+
+.service-menu-container li:last-child {
+    border-bottom: none;
+}
+
+.menu-service:hover >  .service-menu-container {
+    display: block;
+    transition:all 1s ease;
+
+}
+
 	</style>
 </head>
 <body class="is-boxed has-animations">
@@ -69,33 +119,40 @@
 
             <div class="menu">
         <ul>
-            <a href="#"><li>Home</li></a>
-            <a href="#"><li>Services</li></a>
-            <a href="#"><li>Books</li></a>
-            <a href="#"><li>Blogs</li></a>
-            <a href="#"><li>About Me</li></a>
-            <a href="#"><li>Contact Us</li></a>
+            <a href="<%=server%>/"><li>Home</li></a>
+            <a  href="<%=server%>/services"><li>Services</li></a>
+            <a href="<%=server%>/books"><li>Books</li></a>
+            <a href="<%=server%>/blog"><li>Blogs</li></a>
+            <a href="<%=server%>/about-us"><li>About Me</li></a>
         </ul>
 </div> 
             </div>
+            
 				<div id="menu" class="d-flex flex-row justify-content-around w-50">
 				 <div>
 				 <a data-hover href="<%=server%>/" >Home</a>
 				 </div>
-				 <div>
-					 <a data-hover href="" >Services</a>
+				 <div class="menu-service">
+                    
+                        <div class="service-menu-container">
+                            <ul>
+                                <li>IELTS Speaking</li>
+                                <li>IELTS Writing</li>
+                                <li>TOFEL Speaking</li>
+                                <li>TOFEL Writing</li>
+                            </ul>
+                        </div>
+                    
+					 <a   href="<%=server%>/services" >Servicess</a>
 				 </div>
 				 <div>
-					 <a data-hover href="" >Books</a>
+					 <a data-hover href="<%=server%>/books" >Books</a>
 				 </div>
 				 <div>
-					 <a data-hover href="" >Blogs</a>
+					 <a data-hover href="<%=server%>/blog" >Blogs</a>
 				 </div>
 				 <div>
-					 <a data-hover href="" >About Me</a>
-				 </div>
-                 <div>
-					 <a data-hover href="" >Contact Us</a>
+					 <a data-hover href="<%=server%>/about-us" >About Me</a>
 				 </div>
 				</div>
                 <div class="site-header-inner">
