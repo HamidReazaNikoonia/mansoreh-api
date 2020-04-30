@@ -58,6 +58,7 @@
     padding: 5px 0;
     padding-left:10%;
     
+    
 }
 
 .service-menu-container li:hover {
@@ -75,6 +76,19 @@
     display: block;
     transition:all 1s ease;
 
+}
+
+.menu section  li {
+    background-color: #503a3a;
+    color: white;
+    word-spacing: 6px;
+    letter-spacing: 2px;
+}
+
+.menu section  li:hover {
+    color: black;
+    opacity: 0.9;
+    background-color: #503a3ab8;
 }
 
 	</style>
@@ -120,7 +134,24 @@
             <div class="menu">
         <ul>
             <a href="<%=server%>/"><li>Home</li></a>
-            <a  href="<%=server%>/services"><li>Services</li></a>
+            <a ><li class="menu-services-sub">Services</li></a>
+                <!-- Sub Item of Services  -->
+                <section>
+                    <a href="<%=server%>/service/i/s">
+                        <li>IELTS  Speaking</li>
+                    </a>
+                    <a href="<%=server%>/service/t/w">
+                        <li>IELTS  Writing</li>
+                    </a> 
+                    <a href="<%=server%>/service/t/w">
+                        <li>TOFEL Writing</li>
+                    </a> 
+                    <a href="<%=server%>/service/t/s">
+                        <li>TOFEL Speaking</li>
+                    </a> 
+                </section>
+
+                
             <a href="<%=server%>/books"><li>Books</li></a>
             <a href="<%=server%>/blog"><li>Blogs</li></a>
             <a href="<%=server%>/about-us"><li>About Me</li></a>
@@ -136,10 +167,18 @@
                     
                         <div class="service-menu-container">
                             <ul>
-                                <li>IELTS Speaking</li>
-                                <li>IELTS Writing</li>
-                                <li>TOFEL Speaking</li>
-                                <li>TOFEL Writing</li>
+                                <li>
+                                    <a href="<%=server%>/service/i/s">IELTS Speaking</a> 
+                                </li>
+                                <li>
+                                    <a href="<%=server%>/service/t/w">IELTS Writing</a> 
+                                </li>
+                                <li>
+                                    <a href="<%=server%>/service/t/s">TOFEL Speaking</a> 
+                                </li>
+                                <li>
+                                    <a href="<%=server%>/service/t/w">TOFEL Writing</a> 
+                                </li>
                             </ul>
                         </div>
                     
@@ -741,7 +780,19 @@ $('.cross').click(function(e) {
     onResizeForHamburgerMenu();
     window.addEventListener('resize', onResizeForHamburgerMenu, false)
 
+
+  
+
 // init()
-	</script>
+    </script>
+    
+    <script>
+          // Menu Accourdian
+    $('.menu-services-sub').click(function() {
+        
+        console.log('kir');
+        $('.menu section').slideToggle();
+    })
+    </script>
 </body>
 </html>
