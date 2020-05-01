@@ -91,6 +91,13 @@
     background-color: #503a3ab8;
 }
 
+section[data-id="1"] {
+   display: none;
+}
+
+section[data-id="2"] {
+   display: none;
+}
 	</style>
 </head>
 <body class="is-boxed has-animations">
@@ -232,7 +239,23 @@
 	                        <p class="hero-paragraph is-revealing pt-32 pb-16">
 	                        	<%= content.header_title %>
 	                        </p>
-	                        <p data-hover class="hero-cta is-revealing"><a class="button button-primary button-shadow" href="#">Your Services</a></p>
+	                        <p data-hover class="hero-cta is-revealing">
+                                <section data-id="0">
+                                    <a onclick="setStart('start')" class="button button-primary button-shadow" href="#">Choice Services</a>
+                                </section>
+
+                                <section data-id="1">
+                                    <a onclick="setStart({type: 'i'})" class="button button-primary button-shadow mx-3" href="#">IELTS</a>
+
+                                    <a onclick="setStart({type: 't'})" class="button button-primary button-shadow mx-3" href="#">TOFEL</a>
+                                </section>
+
+                                <section data-id="2">
+                                    <a onclick="setStart({kind: 's'})" class="button button-primary button-shadow mx-3" href="#">Speaking</a>
+
+                                    <a onclick="setStart({kind: 'w'})" class="button button-primary button-shadow mx-3" href="#">Writing</a>
+                                </section>
+                            </p>
 						</div>
 						<div class="hero-illustration is-revealing">
                             <svg width="800" height="520" viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg">
@@ -532,7 +555,7 @@
                                             <button class="btn m-1 btn-primary">Calculate</button>
                                         
                                         <div class="m-1">
-                                            <input type="number" placeholder="Words count" >
+                                            <input style="width:240px" type="number" placeholder="Words count" >
                                         </div>
                                     </div>
                                     <div class="pt-3" id="star-row" style="width:100%;">
@@ -616,7 +639,7 @@
                     </div>
                     <ul class="footer-links list-reset">
                         <li>
-                            <a href="#">Contact</a>
+                            <a href="<%=server%>/about-us">Contact</a>
                         </li>
                         <li>
                             <a href="#">About us</a>
@@ -793,6 +816,35 @@ $('.cross').click(function(e) {
         console.log('kir');
         $('.menu section').slideToggle();
     })
+
+    var options = {
+            type: 'i',  // IELTS, TOFEL
+             kind: 'w'   // Writing, Speaking
+         }
+
+        
+     function setStart(obj) {
+         if(obj == "start") {
+            $('section[data-id="0"]').remove();
+            $('section[data-id="1"]').fadeIn();
+         }
+
+         if(typeof obj == "object") {
+             if(obj.type) {
+                 
+                 var updatedOption_ = Object.assign(options, obj);
+                 options = updatedOption_;
+                 $('section[data-id="1"]').remove();
+                 $('section[data-id="2"]').fadeIn();
+
+             } else if(obj.kind) {
+                var updatedOption = Object.assign(options, obj);
+                 options = updatedOption;
+                 window.location.href = "<%=server%>/service/" + options.type + "/" + options.kind + "";
+             }
+         }
+     }
+
     </script>
 </body>
 </html>
