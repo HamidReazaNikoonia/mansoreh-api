@@ -23,14 +23,14 @@
 }
 
 .bk-info h3 {
-	padding: 25px 0 10px;
+	padding: 25px 0 2px;
 	margin-bottom: 20px;
-	border-bottom: 1px solid rgba(0,0,0,0.3);
+	border-bottom: 1px solid rgba(0,0,0,0.2);
 	font-size: 26px;
 }
 
 .bk-info h3 span:first-child {
-	font-size: 14px;
+	font-size: 11px;
 	font-weight: 400;
 	text-transform: uppercase;
 	padding-bottom: 5px;
@@ -78,6 +78,38 @@
 	transform-style: preserve-3d;
 	-webkit-transition: -webkit-transform .5s;
 	transition: transform .5s;
+}
+
+#header-menu {
+	position: fixed;
+	display: none;
+	top:55px;
+	left:0px;
+	right:0;
+	width:100vw;
+	height:30px;
+	background-color: white;
+	z-index:999999;
+	padding: 0 !important;
+	border-radius: 0;
+    box-shadow: 0 11px 20px #80808038;
+}
+
+#header-menu ul {
+	margin-top: 6px;
+	border-style: none;
+}
+
+#header-menu ul > li {
+	display: inline;
+	cursor: pointer;
+	font-family: Poppins;
+	margin-left: 26px;
+    font-size: 0.82rem;
+}
+
+#header-menu ul > li:hover {
+	opacity:0.6;
 }
 
 .bk-list li .bk-book.bk-bookdefault:hover {
@@ -212,6 +244,7 @@
 
 .bk-list li .bk-front > div {
 	border-radius: 0 3px 3px 0;
+	overflow: hidden;
 	box-shadow: 
 		inset 4px 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -337,9 +370,9 @@
 }
 
 .bk-cover > img {
-	/* width:100%; */
+	
 	height: auto;
-	max-width: 300px;
+	max-width: 359px;
 }
 
 .book-1 .bk-cover h2 {

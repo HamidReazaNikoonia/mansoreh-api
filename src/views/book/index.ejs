@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<title><%=appName%> || Books</title>
 		<link href="https://fonts.googleapis.com/css?family=Baloo+2:700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Poppins|Fredoka+One|Acme" rel="stylesheet">
 		<meta name="description" content="3D Book Showcase with CSS 3D Transforms" />
 		<meta name="keywords" content="3d transforms, css3 3d, book, jquery, open book, css transitions" />
 		<meta name="author" content="Codrops" />
@@ -26,6 +27,18 @@ body.sticky-header #header h1 {
   -ms-transform: scale(0, 0);
   -webkit-transform: scale(0, 0);
   transform: scale(0, 0);
+}
+
+.book_item_title {
+	color: #6968c4;
+	transition: all 0.2s ease-in;
+}
+
+
+.book_item_title:hover {
+	color: #191788;
+	transition: all 1s ease-in;
+	
 }
 
 
@@ -164,9 +177,29 @@ body {
 	 -webkit-box-shadow: 0 0 0 1px #fff;
     box-shadow: 0 0 0 1px #fff;
 }
+
+.support-note {
+	color: #c6c3c0;
+}
 		</style>
 	</head>
 	<body>
+		<section id="header-menu">
+			<ul class="d-flex">
+				<li>
+					<a href="<%=server%>/" >Home</a>
+				</li>
+				<li>
+					<a href="<%=server%>/blog" >Blog</a>
+				</li>
+				<li>
+					<a href="<%=server%>/about-us" >About Me</a>
+				</li>
+				<li>
+					<a href="<%=server%>/contact" >Contact</a>
+				</li>
+			</ul>
+		</section>
 		<header id="header">
     <h1><span class="app_name">  <%= appName%></span> Documents </h1>
     <nav id="category">
@@ -177,13 +210,13 @@ body {
   </header>
 		<div class="container" style="padding-top:100px">	
 			
-			<header id="clearfix" class="clearfix">
+			<header style="font-family: Poppins;" id="clearfix" class="clearfix">
 				<h1><span class="app_name">  <%= appName%></span> English Books and Documents</h1>
 				<span class="support-note">best english books and docuemtns in the world</span>
 			</header>
 
 			<div class="main">
-				<ul id="bk-list" class="bk-list clearfix">
+				<ul style="font-family: Poppins;" id="bk-list" class="bk-list clearfix">
 					
 
 <!--
@@ -267,11 +300,14 @@ body {
 
 			$(function(){
   $(window).scroll(function(){
-    var winTop = $(window).scrollTop();
+	  console.log('scrooool')
+	var winTop = $(window).scrollTop();
     if(winTop >= 30){
-      $("body").addClass("sticky-header");
+	  $("body").addClass("sticky-header");
+	  $("#header-menu").fadeIn(900)
     }else{
-      $("body").removeClass("sticky-header");
+	  $("body").removeClass("sticky-header");
+	  $("#header-menu").fadeOut(100)
     }//if-else
   });//win func.
 });//ready func.
@@ -379,7 +415,7 @@ function filterBooks(category) {
 							<h3>
 								<span>${ item.author }</span>
 								<span>
-									<a download href="<%=server%>/file/${item.file_url.file_name}" >
+									<a class="book_item_title" download href="<%=server%>/file/${item.file_url.file_name}" >
 										${ item.name }
 									</a>
 								</span>

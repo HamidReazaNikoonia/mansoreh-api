@@ -42,6 +42,10 @@ router.get('/blog', (req, res, next) => {
   res.render('blog');
 });
 
+router.get('/contact', (req, res, next) => {
+  res.render('contact');
+});
+
 // Services Pages
 
 router.get('/services', (req, res, next) => {
