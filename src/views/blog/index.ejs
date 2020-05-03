@@ -3,20 +3,130 @@
     <head>
         <title><%=appName%> || Blogs</title>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="<%server%>/static/css/bootstrap.css" >
+        <link rel="stylesheet" href="<%server%>/static/css/landing/index.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Poppins|Fredoka+One|Acme|Lato:400,700|PT+Sans:700" rel="stylesheet">
     </head>
     <style>
         body {
-  background: #f2f2f2;
+  background: white;
   font-family: 'proxima-nova-soft', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
+#menu {
+    position: relative;
+}
+
+.service-menu-container {   
+    display:none; 
+    position: absolute;
+    width:160px;
+    border-radius: 6%;
+    border: 1px solid rgba(199, 199, 199, 0.39);
+    box-shadow: 1px 0 3px rgba(199, 199, 199, 0.534);
+    top:30px;
+    background-color: rgba(255, 254, 254, 0.904);
+    left:20%;
+    transition:all 1s ease;
+
+}
+
+.service-menu-container ul {
+    list-style: none;
+    margin: 0;
+    padding:0;
+}
+
+.service-menu-container li {
+    border-bottom: 1px solid rgb(189, 189, 189);
+    cursor: pointer;
+    padding: 5px 0;
+    padding-left:10%;
+    
+    
+}
+
+.service-menu-container li:hover {
+    opacity: 0.6;
+    font-weight: bold;
+    color: black;
+    background-color: rgba(199, 193, 193, 0.589);
+}
+
+.service-menu-container li:last-child {
+    border-bottom: none;
+}
+
+.menu-service:hover >  .service-menu-container {
+    display: block;
+    transition:all 1s ease;
+
+}
+
+.menu section  li {
+    background-color: #503a3a;
+    color: white;
+    word-spacing: 6px;
+    letter-spacing: 2px;
+}
+
+.menu section  li:hover {
+    color: black;
+    opacity: 0.9;
+    background-color: #503a3ab8;
+}
+
+.button-block {
+    display: flex
+}
+
+.site-header {
+    position: relative;
+    padding: 24px 0
+}
+
+.header-illustration {
+    position: absolute;
+    top: -80px;
+    right: -160px
+}
+
+.site-header-inner {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.header-links {
+    display: inline-flex
+}
+
+.header-links li {
+    display: inline-flex
+}
+
+.header-links a:not(.button) {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    text-decoration: none;
+    line-height: 16px;
+    padding: 8px 24px
+}
+
 .post-module {
   position: relative;
   z-index: 1;
+  cursor: pointer;
   display: block;
   background: #FFFFFF;
   min-width: 270px;
@@ -56,7 +166,7 @@
   background: #e74c3c;
   width: 55px;
   height: 55px;
-  padding: 12.5px 0;
+  padding: 5.5px 0;
   -webkit-border-radius: 100%;
   -moz-border-radius: 100%;
   border-radius: 100%;
@@ -111,7 +221,7 @@
 }
 .post-module .post-content .title {
   margin: 0;
-  padding: 0 0 10px;
+  padding: 0 0 0px;
   color: #333333;
   font-size: 26px;
   font-weight: 700;
@@ -119,9 +229,9 @@
 .post-module .post-content .sub_title {
   margin: 0;
   padding: 0 0 20px;
-  color: #e74c3c;
-  font-size: 20px;
-  font-weight: 400;
+  color: #9e9494af;
+  font-size: 12px;
+  margin-top: -30px;
 }
 .post-module .post-content .description {
   display: none;
@@ -146,7 +256,8 @@
   opacity: 1 !important;
 }
 .container {
-  max-width: 800px;
+
+  max-width: 900px;
   min-width: 300px;
   margin: 0 auto;
 }
@@ -212,18 +323,94 @@
 }
 
 
+.container_post {
+  background-color: #efefef94;
+  padding-top: 90px;
+  border-radius: 4%;
+}
+
     </style>
     <body>
-       Blogs
+      <div class="container d-flex flex-row justify-content-between pt-2">
+        <div class="hamburger-button">
+        <button class="hamburger">&#9776;</button>
+        <button class="cross">&#735;</button>
 
-       <div class="container">
-        <div class="info">
+        <div class="menu">
+    <ul>
+        <a href="<%=server%>/"><li>Home</li></a>
+        <a ><li class="menu-services-sub">Services</li></a>
+            <!-- Sub Item of Services  -->
+            <section>
+                <a href="<%=server%>/service/i/s">
+                    <li>IELTS  Speaking</li>
+                </a>
+                <a href="<%=server%>/service/t/w">
+                    <li>IELTS  Writing</li>
+                </a> 
+                <a href="<%=server%>/service/t/w">
+                    <li>TOFEL Writing</li>
+                </a> 
+                <a href="<%=server%>/service/t/s">
+                    <li>TOFEL Speaking</li>
+                </a> 
+            </section>
+
+            
+        <a href="<%=server%>/books"><li>Books</li></a>
+        <a href="<%=server%>/blog"><li>Blogs</li></a>
+        <a href="<%=server%>/about-us"><li>About Me</li></a>
+    </ul>
+</div> 
+        </div>
+        
+    <div id="menu" class="d-flex flex-row justify-content-around w-50">
+     <div>
+     <a data-hover href="<%=server%>/" >Home</a>
+     </div>
+     <div class="menu-service">
+                
+                    <div class="service-menu-container">
+                        <ul>
+                            <li>
+                                <a href="<%=server%>/service/i/s">IELTS Speaking</a> 
+                            </li>
+                            <li>
+                                <a href="<%=server%>/service/t/w">IELTS Writing</a> 
+                            </li>
+                            <li>
+                                <a href="<%=server%>/service/t/s">TOFEL Speaking</a> 
+                            </li>
+                            <li>
+                                <a href="<%=server%>/service/t/w">TOFEL Writing</a> 
+                            </li>
+                        </ul>
+                    </div>
+                
+       <a   href="<%=server%>/services" >Servicess</a>
+     </div>
+     <div>
+       <a data-hover href="<%=server%>/books" >Books</a>
+     </div>
+     <div>
+       <a data-hover href="<%=server%>/blog" >Blogs</a>
+     </div>
+     <div>
+       <a data-hover href="<%=server%>/about-us" >About Me</a>
+     </div>
+    </div>
+            <div class="site-header-inner">
+               
+            </div>
+        </div>
+       
+
+       <div class="container pt-5">
+        <div class="info pt-3">
           <h1><span>A</span>rticle For Improve Yourself</h1>
         </div>
 
-        <!-- Normal Demo-->
-        
-        <!-- Hover Demo-->
+  
       </div>
 
        <div class="container_post container">
@@ -257,6 +444,7 @@
              success: function(res) {
                  if(res.data) {
                     allPosts = res.data;
+                    console.log(allPosts);
                      generateView();
                      setTimeout(patchHoverEvent,1000)
                  }
@@ -273,23 +461,24 @@
         allPosts.forEach(function(post) {
             var template_ = `<div class="column">
           <!-- Post-->
+          <a href="<%=server%>/blog/${post._id}"  >
           <div class="post-module">
             <!-- Thumbnail-->
             <div class="thumbnail">
               <div class="date">
                 <div class="day">27</div>
                 <div class="month">Mar</div>
-              </div><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/photo-1429043794791-eb8f26f44081.jpeg"/>
+              </div><img src="${post.image ? `<%=server%>/file/${post.image.file_name}` : ''}"/>
             </div>
             <!-- Post Content-->
             <div class="post-content">
-              <div class="category">Photos</div>
-              <h1 class="title">City Lights in New York</h1>
-              <h2 class="sub_title">The city that never sleeps.</h2>
-              <p class="description">New York, the largest city in the U.S., is an architectural marvel with plenty of historic monuments, magnificent buildings and countless dazzling skyscrapers.</p>
-              <div class="post-meta"><span class="timestamp"><i class="fa fa-clock-">o</i> 6 mins ago</span><span class="comments"><i class="fa fa-comments"></i><a href="#"> 39 comments</a></span></div>
+              <div class="category">Category | ${post.category}</div>
+              <h1 class="title">${post.title}</h1>
+              <h2 class="sub_title">Author: ${post.author}</h2>
+              <p class="description">${post.short_details}</p>
             </div>
           </div>
+          </a>
         </div>`;
 
         postsContainer.push(template_);
@@ -301,6 +490,8 @@
         $('.container_post').append(postsContainer);
 
       }
+
+
 
       
 
@@ -318,6 +509,45 @@
     //   }
 
       $(document).ready(function() {
+
+
+$('.hamburger').click(function(e) {
+    $(this).hide();
+    $('.cross').show();
+    $( ".menu" ).slideToggle('slow');
+})
+
+$('.cross').click(function(e) {
+    $(this).hide();
+    $('.hamburger').show();
+    $( ".menu" ).slideToggle('slow');
+})
+
+        // Menu Accourdian
+        $('.menu section').slideToggle();
+        $('.menu-services-sub').click(function() {
+        
+        $('.menu section').slideToggle();
+    })
+
+
+  function onResizeForHamburgerMenu() {
+      var widthScreen = window.innerWidth;
+      console.log(widthScreen);
+      if(widthScreen < 700) {
+          $( ".hamburger" ).show();
+          $('#menu > *').hide();
+      } else {
+          $( ".hamburger" ).hide();
+          $( ".menu" ).hide();
+          $( ".cross" ).hide();
+          $('#menu > *').show();
+      }
+  }
+    onResizeForHamburgerMenu();
+    window.addEventListener('resize', onResizeForHamburgerMenu, false)
+
+
           getPosts();
       });
   </script>

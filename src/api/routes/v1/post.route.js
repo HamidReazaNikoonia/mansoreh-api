@@ -10,6 +10,7 @@ Route
 
 Route
   .route('/:id')
+  .get(postController.getById)
   .put(postController.update)
   .delete(postController.delete);
 

@@ -42,6 +42,16 @@ router.get('/blog', (req, res, next) => {
   res.render('blog');
 });
 
+router.get('/blog/:id', async (req, res, next) => {
+  const postId = req.params.id;
+  const post = await Post.findById(postId).populate('image');
+  if (post) {
+    return res.render('blog/page', { post });
+  }
+
+  return res.send('Post Not Found !');
+});
+
 router.get('/contact', (req, res, next) => {
   res.render('contact');
 });

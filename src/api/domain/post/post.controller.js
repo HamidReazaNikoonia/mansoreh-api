@@ -16,6 +16,23 @@ exports.get = async (req, res, next) => {
   }
 };
 
+/**
+ * Get Specific Blog
+ * @public
+ */
+
+exports.getById = async (req, res, next) => {
+  try {
+    const blogId = req.params.id;
+    const post = await Post.findById(blogId).populate('image');
+    res.json({
+      data: post,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 
 /**
  * Create Book
