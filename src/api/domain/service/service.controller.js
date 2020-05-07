@@ -1,5 +1,7 @@
 const httpStatus = require('http-status');
+const APIError = require('../../utils/APIError');
 const Service = require('./service.model');
+const ZarinpalCheckout = require('../../services/payment');
 
 
 exports.get = async (req, res, next) => {
@@ -15,15 +17,64 @@ exports.get = async (req, res, next) => {
 };
 
 
+// function Payment() {
+
+// }
+
+
 exports.create = async (req, res, next) => {
   try {
+    // Payment
+
+    const serviceData = {
+      price: req.price || 0,
+      mobile: req.mobile || '',
+    };
+
     const data = req.body;
     const service = new Service(data);
     const savedService = await service.save();
-    res.status(httpStatus.CREATED);
-    res.json({
-      data: savedService,
+
+    if (!savedService) {
+      throw new APIError({
+        message: 'Can Not Save Receipt',
+        status: httpStatus.NOT_FOUND,
+      });
+    }
+
+    const zarinpal = await ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
+    await zarinpal.PaymentRequest({
+      Amount: '1000',
+      CallbackURL: 'http://localhost:3000/',
+      Description: 'Hello NodeJS API.',
+      Email: 'hi@maid.work',
+      Mobile: '09120000000',
+    }).then(async (response) => {
+      if (response.url && response.status == 100) {
+        const callBackUrl = response.url || false;
+
+        if (callBackUrl) {
+          // res.redirect(callBackUrl);
+          res.json({
+            status: 201,
+            data: savedService,
+            redirect: callBackUrl,
+          });
+        }
+      } else {
+        res.json({
+          error: '',
+          status: 500,
+          redirect: 'http://localhost:3000/service/i/s',
+          data: savedService,
+        });
+      }
     });
+
+    // console.log('After payment');
+    // res.json({
+    //   data: savedService,
+    // });
   } catch (e) {
     next(e);
   }

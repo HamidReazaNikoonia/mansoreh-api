@@ -189,6 +189,11 @@ $('#myform').submit((e) => {
       loading_(false);
       window.uploaded_file = '';
       console.log(result);
+
+      // Redirect if Receipt done
+      if(result.status == 201 && result.redirect) {
+           window.location.href= result.redirect;
+      }
     },
     error(e) {
       console.log(e);

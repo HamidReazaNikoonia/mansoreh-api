@@ -180,6 +180,10 @@ router.post('/dashboard/service/send_result/:id', async (req, res, next) => {
 
 // Upload routes
 
+// Payment Route
+
+// router.get('/pay,')
+
 
 router.post('/test', (req, res, next) => {
   const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
