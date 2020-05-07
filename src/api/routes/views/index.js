@@ -4,7 +4,7 @@ const Upload = require('../../domain/upload/upload.model');
 const Services = require('../../domain/service/service.model');
 const Book = require('../../domain/book/book.model');
 const checkForExist = require('../../services/core/checkForExist');
-// const ZarinpalCheckout = require('../../services/payment');
+const ZarinpalCheckout = require('../../services/payment');
 const cmsController = require('./../../domain/cms/cms.controller');
 const Post = require('./../../domain/post/post.model');
 
@@ -181,28 +181,28 @@ router.post('/dashboard/service/send_result/:id', async (req, res, next) => {
 // Upload routes
 
 
-// router.post('/test', (req, res, next) => {
-//   const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
-//   zarinpal.PaymentRequest({
-//     Amount: '1000',
-//     CallbackURL: 'http://siamak.us',
-//     Description: 'Hello NodeJS API.',
-//     Email: 'hi@maid.work',
-//     Mobile: '09120000000',
-//   }).then((response) => {
-//     if (response.url && response.status == 100) {
-//       const callBackUrl = response.url || false;
+router.post('/test', (req, res, next) => {
+  const zarinpal = ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
+  zarinpal.PaymentRequest({
+    Amount: '1000',
+    CallbackURL: 'http://localhost:3000/',
+    Description: 'Hello NodeJS API.',
+    Email: 'hi@maid.work',
+    Mobile: '09120000000',
+  }).then((response) => {
+    if (response.url && response.status == 100) {
+      const callBackUrl = response.url || false;
 
-//       if (callBackUrl) {
-//         res.redirect(callBackUrl);
-//       }
-//     } else {
-//       res.json({
-//         error: '',
-//       });
-//     }
-//   });
-// });
+      if (callBackUrl) {
+        res.redirect(callBackUrl);
+      }
+    } else {
+      res.json({
+        error: '',
+      });
+    }
+  });
+});
 
 
 // dashboard book
