@@ -133,6 +133,9 @@ $('#myform').submit((e) => {
     return false;
   }
   e.preventDefault();
+
+  localStorage.removeItem('service_id');
+
   loading_(true);
   let user_name;
   let user_family;
@@ -191,14 +194,20 @@ $('#myform').submit((e) => {
       console.log(result);
 
       // Redirect if Receipt done
-      if(result.status == 201 && result.redirect) {
-           window.location.href= result.redirect;
+      if (result.status == 201 && result.redirect) {
+        var service_id = result.data._id;
+        console.log('saved service');
+        console.log(service_id);
+        localStorage.setItem('service_id', service_id.toString());
+        window.location.href = result.redirect;
+      } else {
+        alert('Please Try Again');
       }
     },
-    error(e) {
-      console.log(e);
+    error(err) {
+      console.log(err);
       loading_(false);
-      alert('Try Again');
+      alert('Please Try Again');
     },
   });
 });

@@ -45,10 +45,8 @@ exports.create = async (req, res, next) => {
     const zarinpal = await ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
     await zarinpal.PaymentRequest({
       Amount: '1000',
-      CallbackURL: 'http://localhost:3000/',
-      Description: 'Hello NodeJS API.',
-      Email: 'hi@maid.work',
-      Mobile: '09120000000',
+      CallbackURL: 'http://localhost:3000/service/payment',
+      Description: 'ELMA-CENTER',
     }).then(async (response) => {
       if (response.url && response.status == 100) {
         const callBackUrl = response.url || false;

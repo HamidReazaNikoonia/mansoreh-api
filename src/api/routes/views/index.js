@@ -78,6 +78,16 @@ router.get('/service/t/w', (req, res, next) => {
   res.render('services/tofel_writing');
 });
 
+router.get('/service/payment', (req, res, next) => {
+  const status = req.query.Status || false;
+  if (status) {
+    res.render('services/payment', {
+      status,
+      authority: req.query.Authority || false,
+    });
+  }
+});
+
 
 // dashboard routes
 
@@ -179,10 +189,6 @@ router.post('/dashboard/service/send_result/:id', async (req, res, next) => {
 
 
 // Upload routes
-
-// Payment Route
-
-// router.get('/pay,')
 
 
 router.post('/test', (req, res, next) => {

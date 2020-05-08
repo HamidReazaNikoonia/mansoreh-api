@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 const APIError = require('../../utils/APIError');
@@ -74,7 +75,10 @@ const serviceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Upload',
   },
-  invoice_id: String,
+  invoice_id: {
+    type: String,
+    default: () => Math.floor(Math.random() * (10000 - 1000 + 1)) + 1000,
+  },
 }, {
   timestamps: true,
 });
