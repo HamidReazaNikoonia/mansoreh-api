@@ -79,12 +79,30 @@ router.get('/service/t/w', (req, res, next) => {
   res.render('services/tofel_writing');
 });
 
-router.get('/service/payment', (req, res, next) => {
+router.get('/service/payment', async (req, res, next) => {
   const status = req.query.Status || false;
-  if (status) {
-    res.render('services/payment', {
-      status,
-      authority: req.query.Authority || false,
+  const authority = req.query.Authority || false;
+  const serviceId = req.query.id || false;
+  if (status && authority) {
+    if (status == 'OK' && serviceId) {
+      const updatedservice = await Services.updateOne({ _id: serviceId }, { $set: { payment_status: true } });
+      if (updatedservice) {
+        console.log(updatedservice);
+        res.render('services/payment', {
+          status,
+          updatedservice,
+          authority: req.query.Authority || false,
+        });
+      }
+    } else {
+      res.render('services/payment', {
+        status,
+        authority: req.query.Authority || false,
+      });
+    }
+  } else {
+    res.json({
+      error: 'please try again',
     });
   }
 });

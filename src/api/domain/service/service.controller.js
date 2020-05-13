@@ -70,9 +70,16 @@ exports.create = async (req, res, next) => {
     }
 
     const zarinpal = await ZarinpalCheckout.create('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', true);
+    const serviceId = savedService._id;
+    if (!serviceId) {
+      throw new APIError({
+        message: 'Some thing wrong !',
+        status: httpStatus.NOT_FOUND,
+      });
+    }
     await zarinpal.PaymentRequest({
       Amount: '1000',
-      CallbackURL: 'http://localhost:3000/service/payment',
+      CallbackURL: `http://localhost:3000/service/payment?id=${serviceId}`,
       Description: 'ELMA-CENTER',
     }).then(async (response) => {
       if (response.url && response.status == 100) {

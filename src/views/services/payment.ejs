@@ -594,6 +594,8 @@ p {
             document.querySelector('#service_id').innerHTML = 'Your Service Id: ' + service_id;
         }
 
+        const kir = <%=updatedservice%>;
+
         $.ajax({
             type: 'POST',
             url: '<%=server%>/service/changepaymentstatus',
