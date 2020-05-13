@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const httpStatus = require('http-status');
 const APIError = require('../../utils/APIError');
 const Service = require('./service.model');
@@ -20,6 +21,32 @@ exports.get = async (req, res, next) => {
 // function Payment() {
 
 // }
+
+exports.changeServicePaymentStatus = async (req, res, next) => {
+  try {
+    const authority = req.body.authority || false;
+    const serviceId = req.body.service || false;
+    if (authority && serviceId) {
+      // check Authority by ZarinPalAPI
+      const service = await Service.updateOne({ _id: serviceId }, { $set: { payment_status: true } });
+      if (service) {
+        res.end();
+        return;
+      }
+
+      res.json({
+        error: '',
+      });
+    } else {
+      throw new APIError({
+        message: 'Some thing wrong !',
+        status: httpStatus.NOT_FOUND,
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 exports.create = async (req, res, next) => {

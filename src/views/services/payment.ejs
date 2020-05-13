@@ -583,10 +583,30 @@ p {
         
     </body>
 
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <script>
         var service_id = localStorage.getItem('service_id');
+        var authority_ = <%= authority %>;
         if (service_id !== '' && service_id) {
             document.querySelector('#service_id').innerHTML = 'Your Service Id: ' + service_id;
         }
+
+        $.ajax({
+            type: 'POST',
+            url: '<%=server%>/service/changepaymentstatus',
+            data: {
+                authority: authority_,
+                serviceId: service_id,
+            },
+            success: function(result) {
+                console.log('change payment status successfully');
+            },
+            error: function(err) {
+                console.log(err);
+            }
+        })
     </script>
 </html>

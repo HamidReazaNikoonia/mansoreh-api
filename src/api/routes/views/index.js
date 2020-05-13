@@ -2,6 +2,7 @@ const express = require('express');
 const uploder = require('../../services/upload');
 const Upload = require('../../domain/upload/upload.model');
 const Services = require('../../domain/service/service.model');
+const ServicesController = require('../../domain/service/service.controller');
 const Book = require('../../domain/book/book.model');
 const checkForExist = require('../../services/core/checkForExist');
 const ZarinpalCheckout = require('../../services/payment');
@@ -87,6 +88,8 @@ router.get('/service/payment', (req, res, next) => {
     });
   }
 });
+
+router.post('/service/changepaymentstatus', ServicesController.changeServicePaymentStatus);
 
 
 // dashboard routes
