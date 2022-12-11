@@ -79,7 +79,7 @@
     "dotenv-safe": "^6.0.0",
     "ejs": "^3.0.1",
     "email-templates": "^6.0.3",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "express-validation": "^1.0.2",
     "helmet": "^3.5.0",
     "http-status": "^1.0.1",
